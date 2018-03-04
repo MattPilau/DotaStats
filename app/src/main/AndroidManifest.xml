@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PlayersActivity" />
+        <activity android:name=".HeroesActivity" />
+        <activity android:name=".AllHeroes" />
+
+        <service
+            android:name=".SearchPlayerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
