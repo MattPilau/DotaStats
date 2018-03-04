@@ -54,10 +54,21 @@ public class Players {
     public void addAllValues(JSONArray array) throws JSONException {
         for (int i=0; i < array.length(); i++)
         {
+            if(i > 24)
+                break;
             try {
                 JSONObject temp = array.getJSONObject(i);
                 String name = temp.getString("personaname");
                 String lastPlayed = temp.getString("last_match_time");
+                String s = "";
+                for(int j = 0; j < lastPlayed.length();j++){
+                    if(j < 10 || (j > 10 && j < 19)) {
+                        s += lastPlayed.charAt(j);
+                    }
+                    else if(j == 10)
+                        s += "  ";
+                }
+                lastPlayed = s;
 
                 String url = temp.getString("avatarfull");
                 URL url2 = new URL(url);

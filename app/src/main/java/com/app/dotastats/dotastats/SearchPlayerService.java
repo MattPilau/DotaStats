@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.TimerTask;
 
 
@@ -35,7 +37,7 @@ public class SearchPlayerService extends Service {
     private MyTask myTask;
     private Players players = new Players();
     private String namePlayer;
-    private ImageView i;
+    private ListView listView;
 
     public SearchPlayerService() {
     }
@@ -55,7 +57,7 @@ public class SearchPlayerService extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         Toast.makeText(getBaseContext(), "plop !", Toast.LENGTH_SHORT).show();
-                        myTask  = new MyTask(namePlayer,players,i);
+                        myTask  = new MyTask(namePlayer,players);
                         myTask.execute();
                     } });
             }};
@@ -71,12 +73,10 @@ public class SearchPlayerService extends Service {
     private class MyTask extends AsyncTask<Void, Void, Void> {
 
         Players players;
-        ImageView i;
         String name;
 
-        MyTask(String namePlayer, Players data,ImageView img){
+        MyTask(String namePlayer, Players data){
             players = data;
-            i = img;
             name = namePlayer;
         }
 
@@ -90,8 +90,9 @@ public class SearchPlayerService extends Service {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            // temp display
-            i.setImageBitmap(players.getPlayers().get(0).getAvatar());
+            List<Player> images = players.getPlayers();
+            PlayerAdapter adapter = new PlayerAdapter(listView.getContext(), images);
+            listView.setAdapter(adapter);
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -159,8 +160,6 @@ public class SearchPlayerService extends Service {
         public void setName(String s) {
             namePlayer = s;
         }
-        public void setImageView(ImageView img){
-            i = img;
-        }
+        public void setListView(ListView l){ listView = l;}
     }
 }

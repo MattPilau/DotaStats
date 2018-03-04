@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 // activity used when a user writes the name of a player => the app displays to him each player corresponding to what he wrote
 
@@ -29,7 +32,7 @@ public class PlayersActivity extends AppCompatActivity {
             SearchPlayerInterface myBinder = (SearchPlayerInterface) service;
             players = myBinder.getPlayers();
             myBinder.setName(namePlayer);
-            myBinder.setImageView((ImageView) findViewById(R.id.avatar));
+            myBinder.setListView((ListView) findViewById(R.id.list));
         }
         public void onServiceDisconnected(ComponentName name) { }
     };
@@ -47,7 +50,7 @@ public class PlayersActivity extends AppCompatActivity {
         // get the name of the player
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
-        ((TextView)findViewById(R.id.namePlayer)).setText(namePlayer);
+        ((TextView)findViewById(R.id.namePlayer)).setText(((TextView)findViewById(R.id.namePlayer)).getText().toString() + namePlayer);
 
         final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
         bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
