@@ -35,18 +35,19 @@ public class Players {
     }
 
     // add each received players in the list
-    public void addIntoList(String name,String lastPlayed,Bitmap avatar){
+    public void addIntoList(String name,String lastPlayed,Bitmap avatar,String id){
         Player p = new Player();
         p.setName(name);
         p.setLastPlayed(lastPlayed);
         p.setAvatar(avatar);
+        p.setId(id);
         players.add(p);
     }
 
     // displays some information about the received players
     public void display(){
         for(int i = 0; i < players.size();i++){
-            System.out.println(players.get(i).getName() + " - " + players.get(i).getLastPlayed());
+            System.out.println(players.get(i).getName() + " - " + players.get(i).getLastPlayed() + " - " + players.get(i).getId());
         }
     }
 
@@ -69,6 +70,7 @@ public class Players {
                         s += "  ";
                 }
                 lastPlayed = s;
+                String id = temp.getString("account_id");
 
                 String url = temp.getString("avatarfull");
                 URL url2 = new URL(url);
@@ -76,7 +78,7 @@ public class Players {
                 InputStream is = connection.getInputStream();
                 Bitmap img = BitmapFactory.decodeStream(is);
 
-                addIntoList(name,lastPlayed,img);
+                addIntoList(name,lastPlayed,img,id);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {

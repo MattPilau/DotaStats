@@ -11,8 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // activity used when a user writes the name of a player => the app displays to him each player corresponding to what he wrote
@@ -33,6 +35,7 @@ public class PlayersActivity extends AppCompatActivity {
             players = myBinder.getPlayers();
             myBinder.setName(namePlayer);
             myBinder.setListView((ListView) findViewById(R.id.list));
+            myBinder.setProgressBar((ProgressBar) findViewById(R.id.progressBar));
         }
         public void onServiceDisconnected(ComponentName name) { }
     };
@@ -41,6 +44,10 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
+
+        final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
+        bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
+        startService(intentSearchPlayer);
     }
 
     @Override
@@ -51,16 +58,33 @@ public class PlayersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
         ((TextView)findViewById(R.id.namePlayer)).setText(((TextView)findViewById(R.id.namePlayer)).getText().toString() + namePlayer);
+    }
 
-        final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
-        bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        ((TextView)findViewById(R.id.namePlayer)).setText("");
+    }
 
-        startService(intentSearchPlayer);
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
         unbindService(maConnexion);
+        stopService(new Intent(this,SearchPlayerService.class));
     }
 }

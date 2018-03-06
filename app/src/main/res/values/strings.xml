@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DotaStats</string>
+    <string name="title_activity_player_profile">PlayerProfileActivity</string>
 </resources>

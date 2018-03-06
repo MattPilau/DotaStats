@@ -8,8 +8,12 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,13 +25,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.TimerTask;
 
 
 /*TODO
- * Handle the results of the request in a listView taht displays the name, the picture and the last played game */
+ * Handle the results of the request in a listView that displays the name, the picture and the last played game */
 
 public class SearchPlayerService extends Service {
 
@@ -38,6 +43,7 @@ public class SearchPlayerService extends Service {
     private Players players = new Players();
     private String namePlayer;
     private ListView listView;
+    private ProgressBar progressBar;
 
     public SearchPlayerService() {
     }
@@ -56,7 +62,7 @@ public class SearchPlayerService extends Service {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        Toast.makeText(getBaseContext(), "plop !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
                         myTask  = new MyTask(namePlayer,players);
                         myTask.execute();
                     } });
@@ -90,9 +96,24 @@ public class SearchPlayerService extends Service {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            progressBar.setVisibility(View.GONE);
+
             List<Player> images = players.getPlayers();
             PlayerAdapter adapter = new PlayerAdapter(listView.getContext(), images);
             listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> listView, View itemView, int itemPosition, long itemId)
+                {
+                    Log.i("list",players.getPlayers().get(itemPosition).getName());
+
+                    Intent myIntent = new Intent(listView.getContext(), PlayerProfileActivity.class);
+                    String s = players.getPlayers().get(itemPosition).getId();
+                    myIntent.putExtra("idPlayer", s);
+                    listView.getContext().startActivity(myIntent);
+                }
+            });
+
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -102,46 +123,15 @@ public class SearchPlayerService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            URL url;
+            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/search?q=" + name + "&similarity=1");
+
             try {
+                JSONArray data = new JSONArray(dataCleaned);
 
-                url = new URL("https://api.opendota.com/api/search?q="+name+"&similarity=1");
+                players.addAllValues(data);
+                players.display();
 
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setConnectTimeout(10000);
-                connection.setReadTimeout(10000);
-                connection.connect();
-
-                int status = connection.getResponseCode();
-                if (status != HttpURLConnection.HTTP_OK)
-                    Log.i("error",Integer.toString(status));
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-                String inputLine;
-                StringBuffer content = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    content.append(inputLine);
-                }
-
-                in.close();
-                connection.disconnect();
-
-                String dataCleaned = content.toString();
-                Log.i("json",dataCleaned);
-
-                try {
-                    JSONArray data = new JSONArray(dataCleaned);
-
-                    players.addAllValues(data);
-                    players.display();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            } catch (IOException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -161,5 +151,6 @@ public class SearchPlayerService extends Service {
             namePlayer = s;
         }
         public void setListView(ListView l){ listView = l;}
+        public void setProgressBar(ProgressBar pBar){ progressBar = pBar; }
     }
 }
