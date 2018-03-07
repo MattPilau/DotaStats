@@ -2,6 +2,11 @@ package com.app.dotastats.dotastats;
 
 import android.graphics.Bitmap;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 /**
  * Created by Mamie_Chiffons77 on 04/03/2018.
  */
@@ -52,5 +57,17 @@ public class Player {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void editProfilePlayer(JSONObject object) throws JSONException, IOException {
+        JSONObject profile = object.getJSONObject("profile");
+        this.setName(profile.getString("personaname"));
+        this.setCountry(profile.getString("loccountrycode"));
+        this.setSteamLink(profile.getString("profileurl"));
+        this.setMmr(object.getJSONObject("mmr_estimate").getString("estimate"));
+        this.setRankTier(object.getString("rank_tier"));
+        if(rankTier.equals("null"))
+            setRankTier("Unranked");
+        this.setAvatar(new UtilsHttp().getPicture(profile.getString("avatarfull")));
     }
 }

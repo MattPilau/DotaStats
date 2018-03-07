@@ -1,5 +1,7 @@
 package com.app.dotastats.dotastats;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -7,6 +9,7 @@ import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -67,6 +70,16 @@ public class UtilsHttp {
         }
 
         return dataCleaned;
+    }
+
+    public Bitmap getPicture(String url) throws IOException {
+        URL url2 = new URL(url);
+
+        HttpURLConnection connection  = (HttpURLConnection) url2.openConnection();
+        InputStream is = connection.getInputStream();
+        Bitmap img = BitmapFactory.decodeStream(is);
+
+        return img;
     }
 
 

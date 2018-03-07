@@ -6,12 +6,16 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class PlayerProfileService extends Service {
@@ -19,6 +23,7 @@ public class PlayerProfileService extends Service {
     TaskProfile myTask;
     TimerTask task;
     Player player;
+    ArrayList<View> views;
 
     private final IBinder binder = new MonServiceBinder();
 
@@ -40,7 +45,7 @@ public class PlayerProfileService extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         Toast.makeText(getBaseContext(), "Request made !" + player.getId(), Toast.LENGTH_SHORT).show();
-                        myTask = new TaskProfile(player);
+                        myTask = new TaskProfile(player,views);
                         myTask.execute();
                     } });
             }};
@@ -55,9 +60,11 @@ public class PlayerProfileService extends Service {
 
     private static class TaskProfile extends AsyncTask<Void, Void, Void> {
         Player player;
+        ArrayList<View> views;
 
-        TaskProfile(Player p){
+        TaskProfile(Player p,ArrayList<View> v){
             player = p;
+            views = v;
         }
 
         @Override
@@ -69,6 +76,13 @@ public class PlayerProfileService extends Service {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            ((TextView) views.get(0)).setText(player.getName()); // name
+            ((TextView) views.get(1)).setText(player.getLastPlayed()); // last played
+            ((TextView) views.get(2)).setText(player.getCountry()); // country
+            ((TextView) views.get(3)).setText(player.getMmr()); // mmr
+            ((TextView) views.get(4)).setText(player.getSteamLink()); // steamlink
+            ((TextView) views.get(5)).setText(player.getRankTier()); // ranktier
+            ((ImageView) views.get(6)).setImageBitmap(player.getAvatar()); // avatar
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -82,10 +96,8 @@ public class PlayerProfileService extends Service {
 
             try {
                 JSONObject data = new JSONObject(dataCleaned);
-                JSONObject profile = data.getJSONObject("profile");
-                player.setCountry(profile.getString("loccountrycode"));
-                Log.i("COUNTRY CODE",player.getCountry());
-            } catch (JSONException e) {
+                player.editProfilePlayer(data);
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
             return null;
@@ -96,6 +108,9 @@ public class PlayerProfileService extends Service {
 
         public void setPlayer(Player p){
             player = p;
+        }
+        public void setViews(ArrayList<View> v){
+            views = v;
         }
     }
 }

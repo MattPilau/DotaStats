@@ -109,7 +109,9 @@ public class SearchPlayerService extends Service {
 
                     Intent myIntent = new Intent(listView.getContext(), PlayerProfileActivity.class);
                     String s = players.getPlayers().get(itemPosition).getId();
+                    String lp = players.getPlayers().get(itemPosition).getLastPlayed();
                     myIntent.putExtra("idPlayer", s);
+                    myIntent.putExtra("lastPlayed",lp);
                     listView.getContext().startActivity(myIntent);
                 }
             });

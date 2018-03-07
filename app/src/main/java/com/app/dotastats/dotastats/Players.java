@@ -73,10 +73,7 @@ public class Players {
                 String id = temp.getString("account_id");
 
                 String url = temp.getString("avatarfull");
-                URL url2 = new URL(url);
-                HttpURLConnection connection  = (HttpURLConnection) url2.openConnection();
-                InputStream is = connection.getInputStream();
-                Bitmap img = BitmapFactory.decodeStream(is);
+                Bitmap img = new UtilsHttp().getPicture(url);
 
                 addIntoList(name,lastPlayed,img,id);
             } catch (JSONException e) {
