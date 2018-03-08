@@ -2,7 +2,6 @@ package com.app.dotastats.dotastats;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -10,25 +9,17 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.TimerTask;
+
+import comp.app.dotastats.utils.UtilsHttp;
 
 
 /*TODO

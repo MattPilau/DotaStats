@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import comp.app.dotastats.utils.UtilsPreferences;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+        //new UtilsPreferences().clearFavoritePlayers(getApplicationContext());
 
         findViewById(R.id.findPlayer).setOnClickListener(new View.OnClickListener() {
             @Override

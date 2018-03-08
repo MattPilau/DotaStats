@@ -1,11 +1,8 @@
-package com.app.dotastats.dotastats;
+package comp.app.dotastats.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -46,9 +42,7 @@ public class UtilsHttp {
         in.close();
         connection.disconnect();
 
-        String dataCleaned = content.toString();
-
-        return dataCleaned;
+        return content.toString();
     }
 
     // sets up the http request and returns the received JSON
@@ -77,9 +71,7 @@ public class UtilsHttp {
 
         HttpURLConnection connection  = (HttpURLConnection) url2.openConnection();
         InputStream is = connection.getInputStream();
-        Bitmap img = BitmapFactory.decodeStream(is);
-
-        return img;
+        return BitmapFactory.decodeStream(is);
     }
 
 

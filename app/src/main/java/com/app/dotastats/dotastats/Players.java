@@ -1,18 +1,16 @@
 package com.app.dotastats.dotastats;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+
+import comp.app.dotastats.utils.UtilsHttp;
 
 /**
  * Created by Mamie_Chiffons77 on 04/03/2018.
@@ -76,11 +74,7 @@ public class Players {
                 Bitmap img = new UtilsHttp().getPicture(url);
 
                 addIntoList(name,lastPlayed,img,id);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
         }

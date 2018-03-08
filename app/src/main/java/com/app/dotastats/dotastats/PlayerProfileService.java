@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
+import comp.app.dotastats.utils.UtilsHttp;
+
 public class PlayerProfileService extends Service {
 
     TaskProfile myTask;
