@@ -119,6 +119,11 @@ public class SearchPlayerService extends Service {
             String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/search?q=" + name + "&similarity=1");
 
             try {
+                /* TODO
+                bugs when wifi not launched
+                => check if dataCleaned != null
+                OR => change catch (Exception e)
+                 */
                 JSONArray data = new JSONArray(dataCleaned);
 
                 players.addAllValues(data);
@@ -127,6 +132,7 @@ public class SearchPlayerService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
 

@@ -1,5 +1,7 @@
 package com.app.dotastats.dotastats;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +21,7 @@ import comp.app.dotastats.utils.UtilsPreferences;
 public class PlayerProfileActivity extends AppCompatActivity {
     Player player;
     Boolean isFavorite;
+    Boolean lastMatches = true;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -90,6 +93,22 @@ public class PlayerProfileActivity extends AppCompatActivity {
                 if(p.size() == 0)
                     Log.i(" NAME PLAYER ","EMPTY EMPTY");
                 // END DEBUG
+            }
+        });
+
+        findViewById(R.id.button_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getBaseContext(), "In Fragment :) !", Toast.LENGTH_SHORT).show();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                if(lastMatches)
+                    fragmentTransaction.replace(R.id.fragment_container, new LastMatchesFragment());
+                else
+                    fragmentTransaction.replace(R.id.fragment_container, new LastHeroesFragment());
+                lastMatches = !lastMatches;
+                fragmentTransaction.commit();
             }
         });
     }
