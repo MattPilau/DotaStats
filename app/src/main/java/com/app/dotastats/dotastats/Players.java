@@ -73,6 +73,7 @@ public class Players {
                 String url = temp.getString("avatarfull");
                 Bitmap img = new UtilsHttp().getPicture(url);
 
+
                 addIntoList(name,lastPlayed,img,id);
             } catch (JSONException | IOException e) {
                 e.printStackTrace();

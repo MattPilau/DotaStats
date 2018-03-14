@@ -30,6 +30,7 @@ public class PlayersActivity extends AppCompatActivity {
     private String namePlayer;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
+
         public void onServiceConnected(ComponentName name, IBinder service) {
             SearchPlayerInterface myBinder = (SearchPlayerInterface) service;
             players = myBinder.getPlayers();
@@ -37,6 +38,7 @@ public class PlayersActivity extends AppCompatActivity {
             myBinder.setListView((ListView) findViewById(R.id.list));
             myBinder.setProgressBar((ProgressBar) findViewById(R.id.progressBar));
         }
+
         public void onServiceDisconnected(ComponentName name) { }
     };
 

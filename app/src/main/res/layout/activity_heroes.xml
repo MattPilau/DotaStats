@@ -7,19 +7,306 @@
     android:background="#31323d"
     tools:context="com.app.dotastats.dotastats.HeroesActivity">
 
+    <ImageView
+        android:id="@+id/HeroImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
     <TextView
-        android:id="@+id/nameHero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/HeroName"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/BaseHealthDes"
+        android:layout_width="88dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Base_Health :"
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toBottomOf="@+id/HeroName" />
+
+    <TextView
+        android:id="@+id/BaseManaDes"
+        android:layout_width="88dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Base_Mana :"
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toBottomOf="@+id/BaseHealthDes" />
+
+    <TextView
+        android:id="@+id/BaseHealth"
+        android:layout_width="104dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BaseHealthDes"
+        app:layout_constraintTop_toBottomOf="@+id/HeroName" />
+
+    <TextView
+        android:id="@+id/BaseMana"
+        android:layout_width="117dp"
+        android:layout_height="17dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BaseManaDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseHealth" />
+
+    <TextView
+        android:id="@+id/AttackRangeDes"
+        android:layout_width="88dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Attack_Range "
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toBottomOf="@+id/BaseManaDes" />
+
+    <TextView
+        android:id="@+id/AttackRange"
+        android:layout_width="125dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AttackRangeDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseMana" />
+
+    <TextView
+        android:id="@+id/AttackRateDes"
+        android:layout_width="89dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Attack_Rate"
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toBottomOf="@+id/AttackRangeDes" />
+
+    <TextView
+        android:id="@+id/AttackRate"
+        android:layout_width="126dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AttackRateDes"
+        app:layout_constraintTop_toBottomOf="@+id/AttackRange" />
+
+    <TextView
+        android:id="@+id/BaseArmorDes"
+        android:layout_width="83dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Base_Armor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
+
+    <TextView
+        android:id="@+id/BaseArmor"
+        android:layout_width="82dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/BaseArmorDes"
+        app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
+
+    <TextView
+        android:id="@+id/BaseMrDes"
+        android:layout_width="83dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Base_MR"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BaseArmorDes" />
+
+    <TextView
+        android:id="@+id/BaseMR"
+        android:layout_width="83dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/BaseMrDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseArmor" />
+
+    <TextView
+        android:id="@+id/BaseStrDes"
+        android:layout_width="81dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Base_Str"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BaseMrDes" />
+
+    <TextView
+        android:id="@+id/BaseStr"
+        android:layout_width="82dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/BaseStrDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
+
+    <TextView
+        android:id="@+id/StrGainDes"
+        android:layout_width="76dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Str_Gain"
+        app:layout_constraintStart_toEndOf="@+id/BaseStr"
+        app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
+
+    <TextView
+        android:id="@+id/StrGain"
+        android:layout_width="75dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/StrGainDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
+
+    <TextView
+        android:id="@+id/BaseAgiDes"
+        android:layout_width="81dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Base_Agi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BaseStrDes" />
+
+    <TextView
+        android:id="@+id/BaseAgi"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/BaseAgiDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseStr" />
+
+    <TextView
+        android:id="@+id/BaseIntDes"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Base_Int"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BaseAgiDes" />
+
+    <TextView
+        android:id="@+id/BaseInt"
+        android:layout_width="82dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/BaseIntDes"
+        app:layout_constraintTop_toBottomOf="@+id/BaseAgi" />
+
+    <TextView
+        android:id="@+id/AgiGainDes"
+        android:layout_width="75dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Agi_Gain"
+        app:layout_constraintStart_toEndOf="@+id/BaseAgi"
+        app:layout_constraintTop_toBottomOf="@+id/StrGainDes" />
+
+    <TextView
+        android:id="@+id/AgiGain"
+        android:layout_width="76dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AgiGainDes"
+        app:layout_constraintTop_toBottomOf="@+id/StrGain" />
+
+    <TextView
+        android:id="@+id/IntGainDes"
+        android:layout_width="75dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Int_Gain"
+        app:layout_constraintStart_toEndOf="@+id/BaseInt"
+        app:layout_constraintTop_toBottomOf="@+id/AgiGainDes" />
+
+    <TextView
+        android:id="@+id/IntGain"
+        android:layout_width="77dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/IntGainDes"
+        app:layout_constraintTop_toBottomOf="@+id/AgiGain" />
+
+    <TextView
+        android:id="@+id/MoveSpeedDes"
+        android:layout_width="87dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Move_Speed"
+        app:layout_constraintStart_toEndOf="@+id/HeroImage"
+        app:layout_constraintTop_toBottomOf="@+id/AttackRateDes" />
+
+    <TextView
+        android:id="@+id/MoveSpeed"
+        android:layout_width="115dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/MoveSpeedDes"
+        app:layout_constraintTop_toBottomOf="@+id/AttackRate" />
+
 </android.support.constraint.ConstraintLayout>

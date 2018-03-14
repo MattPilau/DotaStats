@@ -43,6 +43,11 @@
             android:exported="true" />
 
         <activity android:name=".MyPreferenceActivity" />
+
+        <service
+            android:name=".SearchHeroService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

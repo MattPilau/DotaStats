@@ -74,6 +74,13 @@ public class UtilsHttp {
         return BitmapFactory.decodeStream(is);
     }
 
+    public Bitmap getHeroImage(String url) throws IOException{
 
+        String newUrl = "http://cdn.dota2.com" + url;
+        URL tempUrl = new URL(newUrl);
 
+        HttpURLConnection connection = (HttpURLConnection) tempUrl.openConnection();
+        InputStream is = connection.getInputStream();
+        return BitmapFactory.decodeStream(is);
+    }
 }
