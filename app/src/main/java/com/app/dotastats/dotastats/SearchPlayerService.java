@@ -19,7 +19,8 @@ import org.json.JSONException;
 import java.util.List;
 import java.util.TimerTask;
 
-import comp.app.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.Interfaces.SearchPlayerInterface;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 
 /*TODO

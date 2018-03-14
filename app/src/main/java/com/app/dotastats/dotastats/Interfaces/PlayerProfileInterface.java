@@ -1,6 +1,9 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Interfaces;
 
 import android.view.View;
+
+import com.app.dotastats.dotastats.Matches;
+import com.app.dotastats.dotastats.Player;
 
 import java.util.ArrayList;
 
@@ -11,4 +14,5 @@ import java.util.ArrayList;
 public interface PlayerProfileInterface {
     void setPlayer(Player p);
     void setViews(ArrayList<View> views);
+    void setMatches(Matches m);
 }

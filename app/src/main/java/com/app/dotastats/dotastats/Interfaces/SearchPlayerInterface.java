@@ -1,8 +1,9 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Interfaces;
 
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import com.app.dotastats.dotastats.Players;
 
 /**
  * Created by Mamie_Chiffons77 on 04/03/2018.

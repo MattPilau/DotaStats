@@ -1,8 +1,8 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Interfaces;
 
 import android.view.View;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+
+import com.app.dotastats.dotastats.Hero;
 
 import java.util.ArrayList;
 

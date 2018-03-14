@@ -1,16 +1,8 @@
 package com.app.dotastats.dotastats;
 
-import android.graphics.Bitmap;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-
-import comp.app.dotastats.utils.UtilsHttp;
 
 /**
  * Created by Alexis on 10/03/2018.

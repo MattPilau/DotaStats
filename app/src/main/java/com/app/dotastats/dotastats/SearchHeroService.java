@@ -6,12 +6,8 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TimerTask;
 
-import comp.app.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class SearchHeroService extends Service {
 
@@ -128,7 +124,7 @@ public class SearchHeroService extends Service {
 
     }
 
-    private class MonServiceBinder extends Binder implements SearchHeroInterface  {
+    private class MonServiceBinder extends Binder implements SearchHeroInterface {
 
         public void setHeroName(String s) {nameHero = s;}
         public void setHero(Hero h){

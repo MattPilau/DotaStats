@@ -6,10 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import comp.app.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Alexis on 11/03/2018.

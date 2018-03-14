@@ -1,4 +1,4 @@
-package comp.app.dotastats.utils;
+package com.app.dotastats.dotastats.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -83,4 +83,5 @@ public class UtilsHttp {
         InputStream is = connection.getInputStream();
         return BitmapFactory.decodeStream(is);
     }
+
 }

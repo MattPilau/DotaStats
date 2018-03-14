@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import comp.app.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 /**
  * Created by Mamie_Chiffons77 on 04/03/2018.

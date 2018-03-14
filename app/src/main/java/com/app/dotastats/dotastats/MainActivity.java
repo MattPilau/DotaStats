@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import comp.app.dotastats.utils.UtilsPreferences;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

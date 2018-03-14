@@ -1,4 +1,4 @@
-package comp.app.dotastats.utils;
+package com.app.dotastats.dotastats.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

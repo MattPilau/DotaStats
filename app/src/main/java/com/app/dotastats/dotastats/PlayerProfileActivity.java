@@ -1,6 +1,5 @@
 package com.app.dotastats.dotastats;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,17 +15,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import comp.app.dotastats.utils.UtilsPreferences;
+import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
+import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class PlayerProfileActivity extends AppCompatActivity {
     Player player;
     Boolean isFavorite;
     Boolean lastMatches = true;
+    Matches matches;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
             PlayerProfileInterface myBinder = (PlayerProfileInterface) service;
             myBinder.setPlayer(player);
+            myBinder.setMatches(matches);
 
             ArrayList<View> views = new ArrayList<>();
             views.add(findViewById(R.id.namePlayer));
@@ -47,6 +49,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_profile);
 
         player = new Player();
+        matches = new Matches();
 
         final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
         bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
@@ -100,13 +103,14 @@ public class PlayerProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "In Fragment :) !", Toast.LENGTH_SHORT).show();
-
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                if(lastMatches)
-                    fragmentTransaction.replace(R.id.fragment_container, new LastMatchesFragment());
-                else
+                if(lastMatches) {
+                    LastMatchesFragment lastMatchesFragment = new LastMatchesFragment();
+                    lastMatchesFragment.setMatches(matches);
+                    fragmentTransaction.replace(R.id.fragment_container, lastMatchesFragment);
+                }else {
                     fragmentTransaction.replace(R.id.fragment_container, new LastHeroesFragment());
+                }
                 lastMatches = !lastMatches;
                 fragmentTransaction.commit();
             }

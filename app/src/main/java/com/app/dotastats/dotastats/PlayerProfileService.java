@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-import comp.app.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class PlayerProfileService extends Service {
 
@@ -26,6 +28,7 @@ public class PlayerProfileService extends Service {
     TimerTask task;
     Player player;
     ArrayList<View> views;
+    Matches matches;
 
     private final IBinder binder = new MonServiceBinder();
 
@@ -47,7 +50,7 @@ public class PlayerProfileService extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         Toast.makeText(getBaseContext(), "Request made !" + player.getId(), Toast.LENGTH_SHORT).show();
-                        myTask = new TaskProfile(player,views);
+                        myTask = new TaskProfile(player,views,matches);
                         myTask.execute();
                     } });
             }};
@@ -63,10 +66,12 @@ public class PlayerProfileService extends Service {
     private static class TaskProfile extends AsyncTask<Void, Void, Void> {
         Player player;
         ArrayList<View> views;
+        Matches matches;
 
-        TaskProfile(Player p,ArrayList<View> v){
+        TaskProfile(Player p,ArrayList<View> v, Matches m){
             player = p;
             views = v;
+            matches = m;
         }
 
         @Override
@@ -102,11 +107,20 @@ public class PlayerProfileService extends Service {
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
+
+            dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/players/"+player.getId()+"/recentMatches");
+
+            try {
+                JSONArray data = new JSONArray(dataCleaned);
+                matches.editLastMatches(data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }
 
-    private class MonServiceBinder extends Binder implements PlayerProfileInterface  {
+    private class MonServiceBinder extends Binder implements PlayerProfileInterface {
 
         public void setPlayer(Player p){
             player = p;
@@ -114,5 +128,6 @@ public class PlayerProfileService extends Service {
         public void setViews(ArrayList<View> v){
             views = v;
         }
+        public void setMatches(Matches m){ matches = m;}
     }
 }

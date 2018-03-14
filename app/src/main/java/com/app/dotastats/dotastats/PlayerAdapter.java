@@ -36,10 +36,8 @@ public class PlayerAdapter extends ArrayAdapter<Player>{
             convertView.setTag(imageHolder);
         }
 
-        //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
         Player player = getItem(position);
 
-        //il ne reste plus qu'à remplir notre vue
         imageHolder.name.setText(player.getName());
         imageHolder.lastPlayed.setText(player.getLastPlayed());
         imageHolder.image.setImageBitmap(player.getAvatar());
