@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,14 +22,17 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 public class PlayerProfileActivity extends AppCompatActivity {
     Player player;
     Boolean isFavorite;
-    Boolean lastMatches = true;
+    Boolean lastMatches = false;
     Matches matches;
+    MostPlayedHeroes mostPlayedHeroes;
+    FragmentManager fragmentManager;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
             PlayerProfileInterface myBinder = (PlayerProfileInterface) service;
             myBinder.setPlayer(player);
             myBinder.setMatches(matches);
+            myBinder.setMostPlayerHeroes(mostPlayedHeroes);
 
             ArrayList<View> views = new ArrayList<>();
             views.add(findViewById(R.id.namePlayer));
@@ -39,6 +43,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
             views.add(findViewById(R.id.ranktier));
             views.add(findViewById(R.id.avatarProfile));
             myBinder.setViews(views);
+
+            myBinder.setFragmentManager(fragmentManager);
         }
         public void onServiceDisconnected(ComponentName name) { }
     };
@@ -50,10 +56,14 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         player = new Player();
         matches = new Matches();
+        mostPlayedHeroes = new MostPlayedHeroes();
 
         final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
         bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
+        intentProfilePlayer.putExtra("matches",true);
         startService(intentProfilePlayer);
+
+        fragmentManager = getFragmentManager();
     }
 
     @Override
@@ -87,15 +97,6 @@ public class PlayerProfileActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Player removed !", Toast.LENGTH_SHORT).show();
                 }
                 isFavorite = !isFavorite;
-
-                // DEBUG
-                ArrayList<Player> p = new UtilsPreferences().getAllFavoritePlayers(context);
-                for(int i = 0; i < p.size(); i++){
-                    Log.i(" NAME PLAYER " + (i+1)," "+p.get(i).getName());
-                }
-                if(p.size() == 0)
-                    Log.i(" NAME PLAYER ","EMPTY EMPTY");
-                // END DEBUG
             }
         });
 
@@ -103,16 +104,21 @@ public class PlayerProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 if(lastMatches) {
-                    LastMatchesFragment lastMatchesFragment = new LastMatchesFragment();
-                    lastMatchesFragment.setMatches(matches);
-                    fragmentTransaction.replace(R.id.fragment_container, lastMatchesFragment);
+                    goToLastMatchFragment();
                 }else {
-                    fragmentTransaction.replace(R.id.fragment_container, new LastHeroesFragment());
+                    if(mostPlayedHeroes.getMostPlayedHeroes().size() == 0){
+                        final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
+                        bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
+                        intentProfilePlayer.putExtra("matches",false);
+                        startService(intentProfilePlayer);
+
+                        lastMatches = !lastMatches;
+                    }
+                    else
+                       goToHeroesMostPlayedFragment();
                 }
-                lastMatches = !lastMatches;
-                fragmentTransaction.commit();
+
             }
         });
     }
@@ -122,5 +128,25 @@ public class PlayerProfileActivity extends AppCompatActivity {
         super.onDestroy();
         unbindService(maConnexion);
         stopService(new Intent(this,PlayerProfileService.class));
+    }
+
+    private void goToLastMatchFragment(){
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        LastMatchesFragment lastMatchesFragment = new LastMatchesFragment();
+        lastMatchesFragment.setMatches(matches);
+        fragmentTransaction.replace(R.id.fragment_container, lastMatchesFragment);
+
+        lastMatches = !lastMatches;
+        fragmentTransaction.commit();
+    }
+
+    private void goToHeroesMostPlayedFragment(){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        LastHeroesFragment lastHeroesFragment = new LastHeroesFragment();
+        lastHeroesFragment.setHeroes(mostPlayedHeroes);
+        fragmentTransaction.replace(R.id.fragment_container,lastHeroesFragment);
+        lastMatches = !lastMatches;
+        fragmentTransaction.commit();
     }
 }

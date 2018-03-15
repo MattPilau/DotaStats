@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.linkAllFavoritePlayers).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), MyPreferenceActivity.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
+
     }
 
     @Override

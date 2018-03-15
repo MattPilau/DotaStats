@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iconHero"
+            android:layout_width="64dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"/>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameHero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:text="nameHero"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/attribute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="idHero"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/games"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="games"
+            android:textColor="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/ratio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ratio"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/wins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="wins"
+            android:textSize="12sp"
+            android:textColor="#64d176" />
+
+        <TextView
+            android:id="@+id/defeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="defeats"
+            android:textSize="12sp"
+            android:textColor="#b20c0c"/>
+    </LinearLayout>
+
+</LinearLayout>

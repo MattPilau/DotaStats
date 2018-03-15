@@ -22,6 +22,15 @@ public class Player {
     private String country;
     private String mmr;
     private String rankTier; // 2 numbers : the first one is the league, the second one is the division
+    private String idLastGame;
+
+    public String getIdLastGame() {
+        return idLastGame;
+    }
+
+    public void setIdLastGame(String idLastGame) {
+        this.idLastGame = idLastGame;
+    }
 
     public String getSteamLink() {return steamLink;}
     public void setSteamLink(String steamLink) {this.steamLink = steamLink;}
