@@ -47,6 +47,10 @@
         <service
             android:name=".SearchHeroService"
             android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".AllHeroesService"
+            android:enabled="true"
             android:exported="true"></service>
     </application>
 
