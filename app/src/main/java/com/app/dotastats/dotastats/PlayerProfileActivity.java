@@ -71,9 +71,14 @@ public class PlayerProfileActivity extends AppCompatActivity {
         super.onStart();
 
         Intent intent = getIntent();
-        player.setId(intent.getStringExtra("idPlayer"));
-        player.setLastPlayed(intent.getStringExtra("lastPlayed"));
-        player.setLastPlayed(player.getLastPlayed().substring(0,10));
+        if(intent.hasExtra("playerIndex")){
+            player = new UtilsPreferences().getSpecificPlayer(getBaseContext(),intent.getIntExtra("playerIndex",0));
+        }
+        else {
+            player.setId(intent.getStringExtra("idPlayer"));
+            player.setLastPlayed(intent.getStringExtra("lastPlayed"));
+            player.setLastPlayed(player.getLastPlayed().substring(0, 10));
+        }
 
         isFavorite = new UtilsPreferences().isPlayerAFavorite(getApplicationContext(),player.getId());
         if(isFavorite)

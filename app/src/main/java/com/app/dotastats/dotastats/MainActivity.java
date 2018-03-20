@@ -65,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Intent intentService = new Intent(getBaseContext(), FavoritePlayerLastGameService.class);
+        startService(intentService);
+
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        stopService(new Intent(this,FavoritePlayerLastGameService.class));
     }
 }

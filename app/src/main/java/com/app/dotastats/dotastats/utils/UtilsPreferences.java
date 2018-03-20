@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.app.dotastats.dotastats.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -80,5 +81,23 @@ public class UtilsPreferences {
                 return true;
         }
         return false;
+    }
+
+    public int getNumberFavoritePlayers(Context context){
+        return context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE).getInt("nbFavoritePlayers",0);
+    }
+
+    public Player getSpecificPlayer(Context context, int i){
+        return getAllFavoritePlayers(context).get(i);
+    }
+
+    public void updateLastGame(Context context, int index,String id){
+        SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int nb = sharedPref.getInt("nbFavoritePlayers",0);
+        editor.putString("FavoritePlayer"+Integer.toString(index+1)+"idLastGame",id);
+
+        editor.apply();
     }
 }
