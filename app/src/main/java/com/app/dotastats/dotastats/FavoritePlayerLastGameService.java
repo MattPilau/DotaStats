@@ -8,13 +8,12 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.dotastats.dotastats.Activity.PlayerProfileActivity;
+import com.app.dotastats.dotastats.Beans.Player;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
-import com.bumptech.glide.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +48,7 @@ public class FavoritePlayerLastGameService extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         try {
-                            int nbPlayers = new UtilsPreferences().getNumberFavoritePlayers(getBaseContext());
+                            int nbPlayers = UtilsPreferences.getNumberFavoritePlayers(getBaseContext());
                             i = (i+1)%nbPlayers;
 
                             BackgroundRequestTask backgroundRequestTask = new BackgroundRequestTask(i);
@@ -77,7 +76,7 @@ public class FavoritePlayerLastGameService extends Service {
         String id,idLastGame;
         Boolean newGame = false;
 
-        public BackgroundRequestTask(int player){
+        private BackgroundRequestTask(int player){
             this.i = player;
         }
 
@@ -106,18 +105,18 @@ public class FavoritePlayerLastGameService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            Player p = new UtilsPreferences().getSpecificPlayer(getBaseContext(),i);
+            Player p = UtilsPreferences.getSpecificPlayer(getBaseContext(),i);
             id = p.getId();
             idLastGame = p.getIdLastGame();
 
-            String data = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/players/" + id + "/recentMatches");
+            String data = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + id + "/recentMatches");
             try {
                 JSONArray array = new JSONArray(data);
 
                 String lastGame = array.getJSONObject(0).getString("match_id");
                 if(!lastGame.equals(idLastGame)){
                     newGame = true;
-                    new UtilsPreferences().updateLastGame(getBaseContext(),i,idLastGame);
+                    UtilsPreferences.updateLastGame(getBaseContext(),i,idLastGame);
                 }
                 idLastGame = lastGame;
 

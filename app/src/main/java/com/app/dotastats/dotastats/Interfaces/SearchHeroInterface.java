@@ -2,7 +2,7 @@ package com.app.dotastats.dotastats.Interfaces;
 
 import android.view.View;
 
-import com.app.dotastats.dotastats.Hero;
+import com.app.dotastats.dotastats.Beans.Hero;
 
 import java.util.ArrayList;
 

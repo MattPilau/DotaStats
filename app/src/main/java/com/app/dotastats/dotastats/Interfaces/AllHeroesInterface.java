@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Interfaces;
 
 import android.widget.ListView;
 

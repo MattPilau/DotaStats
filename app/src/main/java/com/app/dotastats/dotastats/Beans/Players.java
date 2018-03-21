@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import android.graphics.Bitmap;
 
@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.app.dotastats.dotastats.Beans.Player;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 /**

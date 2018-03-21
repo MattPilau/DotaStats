@@ -20,6 +20,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.app.dotastats.dotastats.Beans.Matches;
+import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
+import com.app.dotastats.dotastats.Beans.Player;
 import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
@@ -118,7 +121,7 @@ public class PlayerProfileService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId());
+            String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId());
 
             try {
                 JSONObject data = new JSONObject(dataCleaned);
@@ -127,7 +130,7 @@ public class PlayerProfileService extends Service {
                 e.printStackTrace();
             }
 
-            dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/players/"+player.getId()+"/recentMatches");
+            dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/"+player.getId()+"/recentMatches");
 
             try {
                 JSONArray data = new JSONArray(dataCleaned);
@@ -174,14 +177,14 @@ public class PlayerProfileService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId() + "/heroes");
+            String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId() + "/heroes");
             try {
                 JSONArray data = new JSONArray(dataCleaned);
                 mostPlayedHeroes.addNewHeroes(data);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/heroStats");
+            dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
             try {
                 JSONArray data = new JSONArray(dataCleaned);
                 mostPlayedHeroes.updateHeroes(data);

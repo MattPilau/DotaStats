@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import android.graphics.Bitmap;
 

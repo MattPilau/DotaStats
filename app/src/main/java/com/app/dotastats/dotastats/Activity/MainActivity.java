@@ -1,11 +1,16 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
+import com.app.dotastats.dotastats.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,11 +20,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /** TODO
+     *
+     * Debug Action bar => makes the whole application lagging ??!
+     */
+
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent homeIntent = new Intent(this, MainActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+
+        return super.onOptionsItemSelected(item);
+    }*/
+
     @Override
     protected void onStart(){
         super.onStart();
 
-        //new UtilsPreferences().clearFavoritePlayers(getApplicationContext());
+        //UtilsPreferences.clearFavoritePlayers(getApplicationContext());
 
         findViewById(R.id.findPlayer).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String s = ((EditText) findViewById(R.id.namePlayerSearch)).getText().toString();
 
-                if(s.equals(null) || s.equals(""))
+                if(s.equals(""))
                     Toast.makeText(getBaseContext(), "Please write a valid username !", Toast.LENGTH_SHORT).show();
                 else {
                     myIntent.putExtra("namePlayer", s);

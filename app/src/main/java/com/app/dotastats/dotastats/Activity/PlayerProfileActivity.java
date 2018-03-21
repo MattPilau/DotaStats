@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -9,7 +9,6 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -17,6 +16,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
+import com.app.dotastats.dotastats.LastHeroesFragment;
+import com.app.dotastats.dotastats.LastMatchesFragment;
+import com.app.dotastats.dotastats.Beans.Matches;
+import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
+import com.app.dotastats.dotastats.Beans.Player;
+import com.app.dotastats.dotastats.PlayerProfileService;
+import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class PlayerProfileActivity extends AppCompatActivity {
@@ -72,7 +78,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent.hasExtra("playerIndex")){
-            player = new UtilsPreferences().getSpecificPlayer(getBaseContext(),intent.getIntExtra("playerIndex",0));
+            player = UtilsPreferences.getSpecificPlayer(getBaseContext(),intent.getIntExtra("playerIndex",0));
         }
         else {
             player.setId(intent.getStringExtra("idPlayer"));
@@ -80,7 +86,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
             player.setLastPlayed(player.getLastPlayed().substring(0, 10));
         }
 
-        isFavorite = new UtilsPreferences().isPlayerAFavorite(getApplicationContext(),player.getId());
+        isFavorite = UtilsPreferences.isPlayerAFavorite(getApplicationContext(),player.getId());
         if(isFavorite)
             ((ImageButton)findViewById(R.id.addFavorite)).setImageResource(android.R.drawable.btn_star_big_on);
 
@@ -93,12 +99,12 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
                 if(!isFavorite) {
                     ((ImageButton) v).setImageResource(android.R.drawable.btn_star_big_on);
-                    new UtilsPreferences().addNewPlayerToListFavorite(context,player);
+                    UtilsPreferences.addNewPlayerToListFavorite(context,player);
                     Toast.makeText(getBaseContext(), "New Favorite Player !", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     ((ImageButton) v).setImageResource(android.R.drawable.btn_star_big_off);
-                    new UtilsPreferences().removePlayerFromListFavorite(context,player);
+                    UtilsPreferences.removePlayerFromListFavorite(context,player);
                     Toast.makeText(getBaseContext(), "Player removed !", Toast.LENGTH_SHORT).show();
                 }
                 isFavorite = !isFavorite;

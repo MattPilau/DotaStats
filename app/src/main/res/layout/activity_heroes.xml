@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#31323d"
-    tools:context="com.app.dotastats.dotastats.HeroesActivity">
+    tools:context="com.app.dotastats.dotastats.Activity.HeroesActivity">
 
     <ImageView
         android:id="@+id/HeroImage"

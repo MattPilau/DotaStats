@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -19,6 +18,11 @@ import org.json.JSONException;
 import java.util.List;
 import java.util.TimerTask;
 
+import com.app.dotastats.dotastats.Activity.HeroesActivity;
+import com.app.dotastats.dotastats.Adapters.AllHeroAdapter;
+import com.app.dotastats.dotastats.Beans.Hero;
+import com.app.dotastats.dotastats.Beans.Heroes;
+import com.app.dotastats.dotastats.Interfaces.AllHeroesInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class AllHeroesService extends Service {
@@ -106,7 +110,7 @@ public class AllHeroesService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/heroStats");
+            String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
 
             try {
                 JSONArray data = new JSONArray(dataCleaned);
@@ -118,10 +122,6 @@ public class AllHeroesService extends Service {
             }
 
             return null;
-        }
-
-        public Heroes getHeroes(){
-            return heroes;
         }
     }
 

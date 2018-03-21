@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Activity;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -7,12 +7,12 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.app.dotastats.dotastats.Interfaces.AllHeroesInterface;
+import com.app.dotastats.dotastats.AllHeroesService;
+import com.app.dotastats.dotastats.R;
+import com.app.dotastats.dotastats.SearchPlayerService;
 
 public class AllHeroes extends AppCompatActivity {
 

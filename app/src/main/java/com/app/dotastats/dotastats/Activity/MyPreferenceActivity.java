@@ -1,19 +1,15 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.app.dotastats.dotastats.Beans.Player;
+import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
@@ -35,14 +31,14 @@ public class MyPreferenceActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        players = new UtilsPreferences().getAllFavoritePlayers(getBaseContext());
+        players = UtilsPreferences.getAllFavoritePlayers(getBaseContext());
 
         ArrayList<String> names = new ArrayList<>();
         for(int i = 0; i < players.size();i++){
             names.add(players.get(i).getName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
-                R.layout.preference_players, R.id.nameFavoritePlayers,names);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(),
+                R.layout.preference_players, R.id.nameFavoritePlayers, names);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

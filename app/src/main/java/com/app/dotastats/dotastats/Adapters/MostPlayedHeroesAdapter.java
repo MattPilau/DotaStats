@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.dotastats.dotastats.Beans.MostPlayedHero;
+import com.app.dotastats.dotastats.R;
+
 import java.util.List;
 
 /**
@@ -18,7 +21,7 @@ import java.util.List;
 
 public class MostPlayedHeroesAdapter extends ArrayAdapter<MostPlayedHero>{
 
-    MostPlayedHeroesAdapter(Context context, List<MostPlayedHero> mostPlayedHeroes) {
+    public MostPlayedHeroesAdapter(Context context, List<MostPlayedHero> mostPlayedHeroes) {
         super(context, 0, mostPlayedHeroes);
     }
 

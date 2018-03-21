@@ -1,6 +1,8 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import android.util.Log;
+
+import com.app.dotastats.dotastats.Beans.Match;
 
 import org.json.JSONArray;
 import org.json.JSONException;

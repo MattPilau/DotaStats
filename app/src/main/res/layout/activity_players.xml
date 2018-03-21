@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#31323d"
-    tools:context="com.app.dotastats.dotastats.PlayersActivity">
+    tools:context="com.app.dotastats.dotastats.Activity.PlayersActivity">
 
     <TextView
         android:id="@+id/namePlayer"
@@ -36,9 +36,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namePlayer" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="414dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -47,6 +47,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namePlayer"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintVertical_bias="0.53" >
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

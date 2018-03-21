@@ -1,5 +1,6 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
+import com.app.dotastats.dotastats.Beans.MostPlayedHero;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 import org.json.JSONArray;

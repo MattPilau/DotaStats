@@ -1,12 +1,11 @@
 package com.app.dotastats.dotastats.Interfaces;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.view.View;
 
-import com.app.dotastats.dotastats.Matches;
-import com.app.dotastats.dotastats.MostPlayedHeroes;
-import com.app.dotastats.dotastats.Player;
+import com.app.dotastats.dotastats.Beans.Matches;
+import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
+import com.app.dotastats.dotastats.Beans.Player;
 
 import java.util.ArrayList;
 

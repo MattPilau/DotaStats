@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import android.graphics.Bitmap;
+
+import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 

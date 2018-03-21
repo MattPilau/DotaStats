@@ -3,9 +3,8 @@ package com.app.dotastats.dotastats.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.app.dotastats.dotastats.Player;
+import com.app.dotastats.dotastats.Beans.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 
 public class UtilsPreferences {
 
-    public void addNewPlayerToListFavorite(Context context,Player player){
+    public static void addNewPlayerToListFavorite(Context context,Player player){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -28,7 +27,7 @@ public class UtilsPreferences {
         editor.apply();
     }
 
-    public void removePlayerFromListFavorite(Context context,Player player){
+    public static void removePlayerFromListFavorite(Context context,Player player){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -49,7 +48,7 @@ public class UtilsPreferences {
         }
     }
 
-    public ArrayList<Player> getAllFavoritePlayers(Context context){
+    public static ArrayList<Player> getAllFavoritePlayers(Context context){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
 
         int nb = sharedPref.getInt("nbFavoritePlayers",0);
@@ -66,7 +65,7 @@ public class UtilsPreferences {
         return players;
     }
 
-    public void clearFavoritePlayers(Context context){
+    public static void clearFavoritePlayers(Context context){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -74,7 +73,7 @@ public class UtilsPreferences {
         editor.apply();
     }
 
-    public boolean isPlayerAFavorite(Context context, String id){
+    public static boolean isPlayerAFavorite(Context context, String id){
         ArrayList<Player> players = getAllFavoritePlayers(context);
         for(int i = 0; i < players.size(); i++){
             if(players.get(i).getId().equals(id))
@@ -83,15 +82,15 @@ public class UtilsPreferences {
         return false;
     }
 
-    public int getNumberFavoritePlayers(Context context){
+    public static int getNumberFavoritePlayers(Context context){
         return context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE).getInt("nbFavoritePlayers",0);
     }
 
-    public Player getSpecificPlayer(Context context, int i){
+    public static Player getSpecificPlayer(Context context, int i){
         return getAllFavoritePlayers(context).get(i);
     }
 
-    public void updateLastGame(Context context, int index,String id){
+    public static void updateLastGame(Context context, int index,String id){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 

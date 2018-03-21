@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 /**
  * Created by Matt on 14/03/2018.

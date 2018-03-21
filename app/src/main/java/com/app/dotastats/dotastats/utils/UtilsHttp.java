@@ -19,7 +19,7 @@ import java.net.URL;
 public class UtilsHttp {
 
     // performs the actual request to the API
-    public String request(URL url) throws IOException {
+    public static String request(URL url) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -46,7 +46,7 @@ public class UtilsHttp {
     }
 
     // sets up the http request and returns the received JSON
-    public String getInfoFromAPI(String request){
+    public static String getInfoFromAPI(String request){
 
         URL url = null;
         try {
@@ -66,7 +66,7 @@ public class UtilsHttp {
         return dataCleaned;
     }
 
-    public Bitmap getPicture(String url) throws IOException {
+    public static Bitmap getPicture(String url) throws IOException {
         URL url2 = new URL(url);
 
         HttpURLConnection connection  = (HttpURLConnection) url2.openConnection();
@@ -74,7 +74,7 @@ public class UtilsHttp {
         return BitmapFactory.decodeStream(is);
     }
 
-    public Bitmap getHeroImage(String url) throws IOException{
+    public static Bitmap getHeroImage(String url) throws IOException{
 
         String newUrl = "http://cdn.dota2.com" + url;
         URL tempUrl = new URL(newUrl);

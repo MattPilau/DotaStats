@@ -1,13 +1,15 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.app.dotastats.dotastats.Beans.Match;
+import com.app.dotastats.dotastats.R;
 
 import java.util.List;
 

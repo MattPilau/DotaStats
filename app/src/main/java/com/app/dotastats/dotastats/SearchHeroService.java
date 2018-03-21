@@ -17,6 +17,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
+import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
@@ -104,7 +105,7 @@ public class SearchHeroService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/heroStats");
+            String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
 
             try {
                 JSONArray data = new JSONArray(dataCleaned);
