@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="filters"
+        android:title="Settings" >
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="enableFilters"
+            android:summary="If yes, only the heroes with at least one of the checked criterias would be displayed"
+            android:title="Enable filters" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="carry"
+            android:summary="Carrys will be displayed in the list"
+            android:title="Carry" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="escape"
+            android:summary="Escapes will be displayed in the list"
+            android:title="Escape" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="nuker"
+            android:summary="Nukers will be displayed in the list"
+            android:title="Nuker" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="initiator"
+            android:summary="Initiators will be displayed in the list"
+            android:title="Initiator" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="durable"
+            android:summary="Durables will be displayed in the list"
+            android:title="Durable" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="disabler"
+            android:summary="Disablers will be displayed in the list"
+            android:title="Disabler" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="jungler"
+            android:summary="Junglers will be displayed in the list"
+            android:title="Jungler" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="support"
+            android:summary="Supports will be displayed in the list"
+            android:title="Support" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="enableFilters"
+            android:key="pusher"
+            android:summary="Pushers will be displayed in the list"
+            android:title="Pusher" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

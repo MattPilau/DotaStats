@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".Activity.PlayersActivity" />
         <activity android:name=".Activity.HeroesActivity" />
-        <activity android:name=".Activity.AllHeroes" />
+        <activity android:name=".Activity.AllHeroesActivity" />
 
         <service
             android:name=".SearchPlayerService"
@@ -42,7 +42,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activity.MyPreferenceActivity" />
+        <activity android:name=".Activity.FavoritePlayersActivity" />
 
         <service
             android:name=".SearchHeroService"
@@ -55,7 +55,9 @@
         <service
             android:name=".FavoritePlayerLastGameService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".Activity.SettingsActivity"></activity>
     </application>
 
 </manifest>

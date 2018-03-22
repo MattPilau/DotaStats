@@ -49,10 +49,12 @@ public class FavoritePlayerLastGameService extends Service {
                     public void run() {
                         try {
                             int nbPlayers = UtilsPreferences.getNumberFavoritePlayers(getBaseContext());
-                            i = (i+1)%nbPlayers;
+                            if(nbPlayers > 0){
+                                i = (i+1)%nbPlayers;
 
-                            BackgroundRequestTask backgroundRequestTask = new BackgroundRequestTask(i);
-                            backgroundRequestTask.execute();
+                                BackgroundRequestTask backgroundRequestTask = new BackgroundRequestTask(i);
+                                backgroundRequestTask.execute();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -111,7 +112,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button_fragment).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.switch1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -127,11 +128,13 @@ public class PlayerProfileActivity extends AppCompatActivity {
                         lastMatches = !lastMatches;
                     }
                     else
-                       goToHeroesMostPlayedFragment();
+                        goToHeroesMostPlayedFragment();
                 }
 
             }
         });
+
+
     }
 
     @Override

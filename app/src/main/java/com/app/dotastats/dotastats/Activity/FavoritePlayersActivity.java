@@ -14,7 +14,7 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
 
-public class MyPreferenceActivity extends Activity {
+public class FavoritePlayersActivity extends Activity {
 
     ArrayList<Player> players;
     ListView listview;

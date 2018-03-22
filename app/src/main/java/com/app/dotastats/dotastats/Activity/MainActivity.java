@@ -3,8 +3,6 @@ package com.app.dotastats.dotastats.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /** TODO
-     *
-     * Debug Action bar => makes the whole application lagging ??!
-     */
+    // Action bar => makes the whole application lagging ?!
 
-   /* @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.linkAllHeroes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(v.getContext(), AllHeroes.class);
+                Intent myIntent = new Intent(v.getContext(), AllHeroesActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
@@ -86,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.linkAllFavoritePlayers).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(v.getContext(), MyPreferenceActivity.class);
+                Intent myIntent = new Intent(v.getContext(), FavoritePlayersActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });

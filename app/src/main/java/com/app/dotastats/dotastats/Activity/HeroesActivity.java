@@ -16,6 +16,7 @@ import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
 import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.SearchHeroService;
+import com.app.dotastats.dotastats.SearchPlayerService;
 
 // activity used when a user writes the name of a hero => the app displays to him each hero corresponding to what he wrote
 
@@ -95,6 +96,8 @@ public class HeroesActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
+        unbindService(maConnexion);
+        stopService(new Intent(this,SearchHeroService.class));
         super.onDestroy();
     }
 

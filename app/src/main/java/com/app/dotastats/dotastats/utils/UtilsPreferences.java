@@ -2,6 +2,7 @@ package com.app.dotastats.dotastats.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.app.dotastats.dotastats.Beans.Player;
 
@@ -98,5 +99,37 @@ public class UtilsPreferences {
         editor.putString("FavoritePlayer"+Integer.toString(index+1)+"idLastGame",id);
 
         editor.apply();
+    }
+
+    public static Boolean filtersEnabled(Context context){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean("enableFilters",false);
+    }
+
+    public static ArrayList<String> askedFilters(Context context){
+
+        ArrayList<String> roles = new ArrayList<>();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if(sharedPreferences.getBoolean("carry",true))
+            roles.add("Carry");
+        if(sharedPreferences.getBoolean("escape",true))
+            roles.add("Escape");
+        if(sharedPreferences.getBoolean("nuker",true))
+            roles.add("Nuker");
+        if(sharedPreferences.getBoolean("initiator",true))
+            roles.add("Initiator");
+        if(sharedPreferences.getBoolean("durable",true))
+            roles.add("Durable");
+        if(sharedPreferences.getBoolean("disabler",true))
+            roles.add("Disabler");
+        if(sharedPreferences.getBoolean("jungler",true))
+            roles.add("Jungler");
+        if(sharedPreferences.getBoolean("support",true))
+            roles.add("Support");
+        if(sharedPreferences.getBoolean("pusher",true))
+            roles.add("Pusher");
+
+        return roles;
     }
 }

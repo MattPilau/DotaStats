@@ -74,7 +74,7 @@ public class PlayersActivity extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        ((TextView)findViewById(R.id.namePlayer)).setText("");
+        ((TextView)findViewById(R.id.namePlayer)).setText("Results for : ");
     }
 
     @Override

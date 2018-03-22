@@ -39,20 +39,4 @@ public class Heroes {
 
         heroes.add(hero);
     }
-
-    public void addHeroStats(JSONArray array) throws JSONException {
-        for(int i = 0; i < array.length(); i++){
-            try {
-                JSONObject temp = array.getJSONObject(i);
-                String name = temp.getString("localized_name");
-                String url = temp.getString("img");
-                Bitmap img = new UtilsHttp().getHeroImage(url);
-
-                addIntoList(name, img);
-            }
-            catch (JSONException|IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
 }
