@@ -14,7 +14,10 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
 import com.app.dotastats.dotastats.LastHeroesFragment;
@@ -27,12 +30,13 @@ import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class PlayerProfileActivity extends AppCompatActivity {
-    Player player;
-    Boolean isFavorite;
-    Boolean lastMatches = false;
-    Matches matches;
-    MostPlayedHeroes mostPlayedHeroes;
-    FragmentManager fragmentManager;
+    private Player player;
+    private Boolean isFavorite;
+    private Boolean lastMatches = false;
+    private Matches matches;
+    private MostPlayedHeroes mostPlayedHeroes;
+    private FragmentManager fragmentManager;
+    private Boolean request;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -61,14 +65,11 @@ public class PlayerProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
 
+        request = true;
+
         player = new Player();
         matches = new Matches();
         mostPlayedHeroes = new MostPlayedHeroes();
-
-        final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
-        bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
-        intentProfilePlayer.putExtra("matches",true);
-        startService(intentProfilePlayer);
 
         fragmentManager = getFragmentManager();
     }
@@ -76,6 +77,13 @@ public class PlayerProfileActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+        if(request){
+            final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
+            bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
+            intentProfilePlayer.putExtra("matches",true);
+            startService(intentProfilePlayer);
+        }
 
         Intent intent = getIntent();
         if(intent.hasExtra("playerIndex")){
@@ -135,6 +143,12 @@ public class PlayerProfileActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        request = false;
     }
 
     @Override

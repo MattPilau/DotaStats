@@ -1,7 +1,10 @@
 package com.app.dotastats.dotastats;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -46,7 +49,6 @@ public class SearchHeroService extends Service {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
                         myTask  = new MyTask(nameHero, hero);
                         myTask.execute();
                     } });
@@ -56,7 +58,6 @@ public class SearchHeroService extends Service {
     }
 
     public void onDestroy() { // Destruction du service
-        Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
         task.cancel();
     }
 
@@ -64,6 +65,7 @@ public class SearchHeroService extends Service {
 
         Hero hero;
         String name;
+        private Boolean internetError = false,heroError = false;
 
         MyTask(String nameHero, Hero data){
             hero = data;
@@ -73,29 +75,33 @@ public class SearchHeroService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-
-
-            ((TextView) views.get(0)).setText(Double.toString(hero.getBase_health())); // name
-            ((TextView) views.get(1)).setText(Double.toString(hero.getBase_mana())); // last played
-            ((TextView) views.get(2)).setText(Double.toString(hero.getAttack_range())); // country
-            ((TextView) views.get(3)).setText(Double.toString(hero.getAttack_rate())); // mmr
-            ((TextView) views.get(4)).setText(Double.toString(hero.getMove_speed())); // steamlink
-            ((TextView) views.get(5)).setText(Double.toString(hero.getBase_armor()));
-            ((TextView) views.get(6)).setText(Double.toString(hero.getBase_mr()));
-            ((TextView) views.get(7)).setText(Double.toString(hero.getBase_str()));
-            ((TextView) views.get(8)).setText(Double.toString(hero.getStr_gain()));
-            ((TextView) views.get(9)).setText(Double.toString(hero.getBase_agi()));
-            ((TextView) views.get(10)).setText(Double.toString(hero.getAgi_gain()));
-            ((TextView) views.get(11)).setText(Double.toString(hero.getBase_int()));
-            ((TextView) views.get(12)).setText(Double.toString(hero.getInt_gain()));// ranktier
-            ((ImageView) views.get(13)).setImageBitmap(hero.getImage()); // avatar
+            if(internetError)
+                Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+            else if(heroError){
+                Toast.makeText(getBaseContext(), "There isn't any hero named "+ name + "!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                ((TextView) views.get(0)).setText(Double.toString(hero.getBase_health())); // name
+                ((TextView) views.get(1)).setText(Double.toString(hero.getBase_mana())); // last played
+                ((TextView) views.get(2)).setText(Double.toString(hero.getAttack_range())); // country
+                ((TextView) views.get(3)).setText(Double.toString(hero.getAttack_rate())); // mmr
+                ((TextView) views.get(4)).setText(Double.toString(hero.getMove_speed())); // steamlink
+                ((TextView) views.get(5)).setText(Double.toString(hero.getBase_armor()));
+                ((TextView) views.get(6)).setText(Double.toString(hero.getBase_mr()));
+                ((TextView) views.get(7)).setText(Double.toString(hero.getBase_str()));
+                ((TextView) views.get(8)).setText(Double.toString(hero.getStr_gain()));
+                ((TextView) views.get(9)).setText(Double.toString(hero.getBase_agi()));
+                ((TextView) views.get(10)).setText(Double.toString(hero.getAgi_gain()));
+                ((TextView) views.get(11)).setText(Double.toString(hero.getBase_int()));
+                ((TextView) views.get(12)).setText(Double.toString(hero.getInt_gain()));// ranktier
+                ((ImageView) views.get(13)).setImageBitmap(hero.getImage()); // avatar
+            }
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -105,24 +111,25 @@ public class SearchHeroService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
+            NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if(info == null){
+                internetError = true;
+                return null;
+            }
+
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
 
             try {
                 JSONArray data = new JSONArray(dataCleaned);
 
-                hero.addHeroStats(data, name);
+                heroError = !hero.addHeroStats(data, name);
                 hero.displayHero();
 
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
             }
             return null;
         }
-
-        //public Heroes getHeroes(){
-            //return heroes;
-        //}
-
     }
 
     private class MonServiceBinder extends Binder implements SearchHeroInterface {

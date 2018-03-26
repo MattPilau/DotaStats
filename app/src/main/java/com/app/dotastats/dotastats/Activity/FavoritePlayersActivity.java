@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class FavoritePlayersActivity extends Activity {
 
-    ArrayList<Player> players;
-    ListView listview;
+    private ArrayList<Player> players;
+    private ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

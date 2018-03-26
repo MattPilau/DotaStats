@@ -2,12 +2,16 @@ package com.app.dotastats.dotastats;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.app.dotastats.dotastats.Activity.PlayerProfileActivity;
@@ -18,6 +22,8 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -76,7 +82,7 @@ public class FavoritePlayerLastGameService extends Service {
 
         int i;
         String id,idLastGame;
-        Boolean newGame = false;
+        Boolean newGame = false,internetError = false;
 
         private BackgroundRequestTask(int player){
             this.i = player;
@@ -85,19 +91,19 @@ public class FavoritePlayerLastGameService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            if(newGame){
+            if(newGame)
                 sendNotification();
-                Toast.makeText(getBaseContext(), idLastGame + " " + id + " -- " + i, Toast.LENGTH_SHORT).show();
-            }
             else
-                Toast.makeText(getBaseContext(), "Pas de nouvelles parties ! "+ " " + id + " -- " + i, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "No new game " + id, Toast.LENGTH_SHORT).show();
+
+            if(internetError)
+                Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -107,22 +113,36 @@ public class FavoritePlayerLastGameService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
+            NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if(info == null){
+                internetError = true;
+                return null;
+            }
+
             Player p = UtilsPreferences.getSpecificPlayer(getBaseContext(),i);
             id = p.getId();
             idLastGame = p.getIdLastGame();
 
             String data = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + id + "/recentMatches");
+
             try {
                 JSONArray array = new JSONArray(data);
 
                 String lastGame = array.getJSONObject(0).getString("match_id");
+
                 if(!lastGame.equals(idLastGame)){
                     newGame = true;
-                    UtilsPreferences.updateLastGame(getBaseContext(),i,idLastGame);
+
+                    long unixSeconds = array.getJSONObject(0).getLong("start_time");
+                    Date date = new java.util.Date(unixSeconds*1000L);
+                    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy - MM - dd");
+                    String lastPlayed = sdf.format(date);
+
+                    UtilsPreferences.updateLastGame(getBaseContext(),i,idLastGame,lastPlayed);
                 }
                 idLastGame = lastGame;
 
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
             }
 

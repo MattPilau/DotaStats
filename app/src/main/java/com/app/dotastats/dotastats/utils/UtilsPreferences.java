@@ -91,12 +91,14 @@ public class UtilsPreferences {
         return getAllFavoritePlayers(context).get(i);
     }
 
-    public static void updateLastGame(Context context, int index,String id){
+    public static void updateLastGame(Context context, int index,String id, String lastPlayed){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         int nb = sharedPref.getInt("nbFavoritePlayers",0);
         editor.putString("FavoritePlayer"+Integer.toString(index+1)+"idLastGame",id);
+        editor.putString("FavoritePlayer"+Integer.toString(index+1)+"lastPlayed", lastPlayed);
+
 
         editor.apply();
     }

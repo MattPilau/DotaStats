@@ -32,6 +32,7 @@ public class PlayersActivity extends AppCompatActivity {
     private Players players;
     private String namePlayer;
     private PlayerAdapter adapter;
+    private Boolean request;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
 
@@ -51,9 +52,7 @@ public class PlayersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
-        final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
-        bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
-        startService(intentSearchPlayer);
+        request = true;
 
         // RecyclerView adapter needs to be created at this point, and will be updated once the data are received from the API
         adapter = new PlayerAdapter(getBaseContext(),new ArrayList<Player>());
@@ -65,6 +64,12 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        if(request){
+            final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
+            bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
+            startService(intentSearchPlayer);
+        }
+
         // get the name of the player
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
@@ -75,6 +80,7 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onRestart(){
         super.onRestart();
         ((TextView)findViewById(R.id.namePlayer)).setText("Results for : ");
+        request = false;
     }
 
     @Override

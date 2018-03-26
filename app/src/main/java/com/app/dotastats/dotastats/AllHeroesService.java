@@ -1,8 +1,11 @@
 package com.app.dotastats.dotastats;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -60,7 +63,6 @@ public class AllHeroesService extends Service {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
                         myTask  = new MyTask(heroes);
                         myTask.execute();
                     } });
@@ -70,14 +72,13 @@ public class AllHeroesService extends Service {
     }
 
     public void onDestroy() { // Destruction du service
-        Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
         task.cancel();
     }
-
 
     private class MyTask extends AsyncTask<Void, Integer, Void> {
 
         private Heroes heroes;
+        private Boolean internetError = false;
 
         MyTask(Heroes data){
             heroes = data;
@@ -94,9 +95,13 @@ public class AllHeroesService extends Service {
 
         @Override
         protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
+            if(internetError)
+                Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+            else {
+                super.onPostExecute(result);
+                adapter.setHeroes(heroes.getHeroes());
+            }
             bar.setVisibility(View.GONE);
-            adapter.setHeroes(heroes.getHeroes());
             button.setEnabled(true);
         }
 
@@ -107,7 +112,13 @@ public class AllHeroesService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            ArrayList<String> filters = null;
+            NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if(info == null){
+                internetError = true;
+                return null;
+            }
+
+            ArrayList<String> filters;
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
 
             try {

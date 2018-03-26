@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         //UtilsPreferences.clearFavoritePlayers(getApplicationContext());
+        Intent intentService = new Intent(getApplicationContext(), FavoritePlayerLastGameService.class);
+        startService(intentService);
 
         findViewById(R.id.findPlayer).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 v.getContext().startActivity(myIntent);
             }
         });
-
-        Intent intentService = new Intent(getBaseContext(), FavoritePlayerLastGameService.class);
-        startService(intentService);
-
     }
 
     @Override

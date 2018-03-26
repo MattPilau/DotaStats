@@ -30,6 +30,7 @@ public class AllHeroesActivity extends AppCompatActivity {
 
     private AllHeroAdapter adapter;
     private Heroes heroes;
+    private Boolean request;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
 
@@ -50,10 +51,7 @@ public class AllHeroesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_heroes);
 
         heroes = new Heroes();
-
-        final Intent intentAllHeroes = new Intent (getBaseContext(), AllHeroesService.class);
-        bindService(intentAllHeroes, maConnexion, Context.BIND_AUTO_CREATE);
-        startService(intentAllHeroes);
+        request = true;
 
         // RecyclerView adapter needs to be created at this point, and will be updated once the data are received from the API
         adapter = new AllHeroAdapter(new ArrayList<Hero>());
@@ -64,6 +62,12 @@ public class AllHeroesActivity extends AppCompatActivity {
     @Override
     protected  void onStart(){
         super.onStart();
+
+        if(request){
+            final Intent intentAllHeroes = new Intent (getBaseContext(), AllHeroesService.class);
+            bindService(intentAllHeroes, maConnexion, Context.BIND_AUTO_CREATE);
+            startService(intentAllHeroes);
+        }
 
         findViewById(R.id.settingsSearch).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,7 @@ public class AllHeroesActivity extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
+        request = false;
     }
 
     @Override

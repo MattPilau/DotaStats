@@ -3,7 +3,10 @@ package com.app.dotastats.dotastats;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -28,13 +31,15 @@ import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class PlayerProfileService extends Service {
 
-    TaskProfile myTask;
-    TaskHero taskHero;
-    Player player;
-    ArrayList<View> views;
-    Matches matches;
-    MostPlayedHeroes mostPlayedHeroes;
-    FragmentManager fragmentManager;
+    private TaskProfile myTask;
+    private TaskHero taskHero;
+    private  Player player;
+    private ArrayList<View> views;
+    private  Matches matches;
+    private MostPlayedHeroes mostPlayedHeroes;
+    private FragmentManager fragmentManager;
+
+    private Boolean wantsMatches;
 
     private final IBinder binder = new MonServiceBinder();
 
@@ -49,14 +54,13 @@ public class PlayerProfileService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
 
-        Boolean wantsMatches = intent.getBooleanExtra("matches",true);
+       wantsMatches = intent.getBooleanExtra("matches",true);
 
         final Handler handler = new Handler();
 
         if(wantsMatches) {
             handler.post(new Runnable() {
                 public void run() {
-                    Toast.makeText(getBaseContext(), "Request made !" + player.getId(), Toast.LENGTH_SHORT).show();
                     myTask = new TaskProfile(player, views, matches, fragmentManager);
                     myTask.execute();
                 }
@@ -65,7 +69,6 @@ public class PlayerProfileService extends Service {
         else{
             handler.post(new Runnable() {
                 public void run() {
-                    Toast.makeText(getBaseContext(), "Second Request made ! " , Toast.LENGTH_SHORT).show();
                     taskHero = new TaskHero(player,fragmentManager,mostPlayedHeroes);
                     taskHero.execute();
                 }
@@ -75,14 +78,18 @@ public class PlayerProfileService extends Service {
     }
 
     public void onDestroy() { // Destruction du service
-        Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
+        if(wantsMatches)
+            myTask.cancel(true);
+        else
+            taskHero.cancel(true);
     }
 
-    private static class TaskProfile extends AsyncTask<Void, Void, Void> {
+    private class TaskProfile extends AsyncTask<Void, Void, Void> {
         Player player;
         ArrayList<View> views;
         Matches matches;
         FragmentManager fragmentManager;
+        private Boolean internetError = false;
 
         TaskProfile(Player p,ArrayList<View> v, Matches m,FragmentManager manager){
             player = p;
@@ -99,19 +106,24 @@ public class PlayerProfileService extends Service {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            ((TextView) views.get(0)).setText(player.getName()); // name
-            ((TextView) views.get(1)).setText(player.getLastPlayed()); // last played
-            ((TextView) views.get(2)).setText(player.getCountry()); // country
-            ((TextView) views.get(3)).setText(player.getMmr()); // mmr
-            ((TextView) views.get(4)).setText(player.getSteamLink()); // steamlink
-            ((TextView) views.get(5)).setText(player.getRankTier()); // ranktier
-            ((ImageView) views.get(6)).setImageBitmap(player.getAvatar()); // avatar
 
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            LastMatchesFragment lastMatchesFragment = new LastMatchesFragment();
-            lastMatchesFragment.setMatches(matches);
-            fragmentTransaction.replace(R.id.fragment_container, lastMatchesFragment);
-            fragmentTransaction.commit();
+            if(internetError)
+                Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+            else {
+                ((TextView) views.get(0)).setText(player.getName()); // name
+                ((TextView) views.get(1)).setText(player.getLastPlayed()); // last played
+                ((TextView) views.get(2)).setText(player.getCountry()); // country
+                ((TextView) views.get(3)).setText(player.getMmr()); // mmr
+                ((TextView) views.get(4)).setText(player.getSteamLink()); // steamlink
+                ((TextView) views.get(5)).setText(player.getRankTier()); // ranktier
+                ((ImageView) views.get(6)).setImageBitmap(player.getAvatar()); // avatar
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                LastMatchesFragment lastMatchesFragment = new LastMatchesFragment();
+                lastMatchesFragment.setMatches(matches);
+                fragmentTransaction.replace(R.id.fragment_container, lastMatchesFragment);
+                fragmentTransaction.commit();
+            }
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -120,6 +132,13 @@ public class PlayerProfileService extends Service {
 
         @Override
         protected Void doInBackground(Void ...params) {
+
+            NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if(info == null){
+                internetError = true;
+                return null;
+            }
+
 
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId());
 

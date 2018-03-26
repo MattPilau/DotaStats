@@ -103,8 +103,8 @@ public class Hero {
 
 
 
-    public void addHeroStats(JSONArray array, String desiredName) throws JSONException {
-        //Hero newHero = new Hero();
+    public Boolean addHeroStats(JSONArray array, String desiredName) throws JSONException {
+
         for(int i = 0; i < array.length(); i++){
             try {
                 JSONObject temp = array.getJSONObject(i);
@@ -182,12 +182,15 @@ public class Hero {
                     this.setMove_speed(move_speed);
 
                     i = array.length();
+
+                    return true;
                 }
             }
             catch (JSONException e){
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
 

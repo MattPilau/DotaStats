@@ -1,7 +1,10 @@
 package com.app.dotastats.dotastats;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -56,7 +59,6 @@ public class SearchPlayerService extends Service {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
                         myTask  = new MyTask(namePlayer,players,adapter);
                         myTask.execute();
                     } });
@@ -66,7 +68,6 @@ public class SearchPlayerService extends Service {
     }
 
     public void onDestroy() { // Destruction du service
-        Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
         task.cancel();
     }
 
@@ -75,6 +76,7 @@ public class SearchPlayerService extends Service {
         Players players;
         String name;
         PlayerAdapter adapter;
+        private Boolean internetError = false,playerError = false;
 
         MyTask(String namePlayer, Players data, PlayerAdapter a){
             players = data;
@@ -90,12 +92,16 @@ public class SearchPlayerService extends Service {
 
         @Override
         protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-
+            if(internetError)
+                Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+            else if(playerError)
+                Toast.makeText(getBaseContext(),"There isn't any player named "+name+" !", Toast.LENGTH_SHORT).show();
+            else {
+                super.onPostExecute(result);
+                ArrayList<Player> images = players.getPlayers();
+                adapter.setPlayers(images);
+            }
             progressBar.setVisibility(View.GONE);
-
-            ArrayList<Player> images = players.getPlayers();
-            adapter.setPlayers(images);
         }
 
         protected void onProgressUpdate(Void... values) {
@@ -105,20 +111,25 @@ public class SearchPlayerService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
+            NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if(info == null){
+                internetError = true;
+                return null;
+            }
+
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/search?q=" + name + "&similarity=1");
+            if(dataCleaned.equals("[]")){
+                playerError = true;
+                return null;
+            }
 
             try {
-                /* TODO
-                bugs when wifi not launched
-                => check if dataCleaned != null
-                OR => change catch (Exception e)
-                 */
                 JSONArray data = new JSONArray(dataCleaned);
 
                 players.addAllValues(data);
                 players.display();
 
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
             }
 

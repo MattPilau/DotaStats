@@ -24,6 +24,7 @@ public class HeroesActivity extends AppCompatActivity {
 
     private Hero hero;
     private String nameHero;
+    private Boolean request;
 
 
     private ServiceConnection maConnexion = new ServiceConnection() {
@@ -59,15 +60,18 @@ public class HeroesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_heroes);
 
         hero = new Hero();
-
-        final Intent intentSearchHero = new Intent(getBaseContext(),SearchHeroService.class);
-        bindService(intentSearchHero, maConnexion, Context.BIND_AUTO_CREATE);
-        startService(intentSearchHero);
+        request= true;
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+
+        if(request){
+            final Intent intentSearchHero = new Intent(getBaseContext(),SearchHeroService.class);
+            bindService(intentSearchHero, maConnexion, Context.BIND_AUTO_CREATE);
+            startService(intentSearchHero);
+        }
 
         Intent intent = getIntent();
         nameHero = intent.getStringExtra("nameHero");
@@ -77,6 +81,7 @@ public class HeroesActivity extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
+        request = false;
     }
 
     @Override
