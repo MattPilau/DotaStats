@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
@@ -15,7 +16,8 @@
             android:layout_height="36dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="2dp"/>
+            android:layout_marginTop="2dp"
+            android:contentDescription="@string/heroPictureDescription" />
 
         <LinearLayout
             android:layout_width="100dp"
@@ -28,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                android:text="nameHero"
+                android:text="@string/name"
                 android:textColor="@android:color/darker_gray" />
 
             <TextView
@@ -36,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="idHero"
+                android:text="@string/idHero"
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
     </LinearLayout>
@@ -51,14 +53,14 @@
             android:id="@+id/games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="games"
+            android:text="@string/games"
             android:textColor="@android:color/darker_gray"/>
 
         <TextView
             android:id="@+id/ratio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ratio"
+            android:text="@string/ratio"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
 
@@ -66,14 +68,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="right">
+        android:gravity="right"
+        tools:ignore="RtlHardcoded">
 
         <TextView
             android:id="@+id/wins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="wins"
+            android:text="@string/wins"
             android:textSize="12sp"
             android:textColor="#64d176" />
 
@@ -82,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="defeats"
+            android:text="@string/defeats"
             android:textSize="12sp"
             android:textColor="#b20c0c"/>
     </LinearLayout>

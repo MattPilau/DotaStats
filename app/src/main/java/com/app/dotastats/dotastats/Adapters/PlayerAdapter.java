@@ -2,6 +2,7 @@ package com.app.dotastats.dotastats.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.MyViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    name.setTextColor(Color.parseColor("#ffffff"));
+
                     Intent myIntent = new Intent(view.getContext(), PlayerProfileActivity.class);
                     myIntent.putExtra("idPlayer", p.getId());
                     myIntent.putExtra("lastPlayed",lastPlayed.getText().toString());

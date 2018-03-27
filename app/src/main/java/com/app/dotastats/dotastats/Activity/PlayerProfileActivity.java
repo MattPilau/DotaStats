@@ -53,6 +53,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
             views.add(findViewById(R.id.steamlink));
             views.add(findViewById(R.id.ranktier));
             views.add(findViewById(R.id.avatarProfile));
+            views.add(findViewById(R.id.progressBarProfile));
             myBinder.setViews(views);
 
             myBinder.setFragmentManager(fragmentManager);

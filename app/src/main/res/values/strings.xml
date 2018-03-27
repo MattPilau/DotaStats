@@ -23,4 +23,63 @@
     <string name="video_error_unknown_error">Failed to load video</string>
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
+
+    <string name="Title">Dota Stats</string>
+    <string name="findPlayer">Find a Player</string>
+    <string name="findHero">Find a Hero</string>
+    <string name="logo">Logo Dota</string>
+    <string name="heroes">all Heroes</string>
+    <string name="players">Favorite Players</string>
+
+    <string name="filters">Search Filters</string>
+    <string name="refresh">Refresh</string>
+    <string name="wifi">Wifi</string>
+    <string name="results">Results for : </string>
+
+    <string name="textview">Textview</string>
+    <string name="heroPictureDescription">hero Picture</string>
+    <string name="baseHealth">Base_Health :</string>
+    <string name="baseMana">Base_Mana :</string>
+    <string name="attackRange">Attack_Range </string>
+    <string name="attackRate">Attack_Rate</string>
+    <string name="baseArmor">Base_Armor</string>
+    <string name="baseMR">Base_MR</string>
+    <string name="baseSTR">Base_Str</string>
+    <string name="strGain">Str_Gain</string>
+    <string name="baseAgi">Base_Agi</string>
+    <string name="agiGain">Agi_Gain</string>
+    <string name="baseInt">Base_Int</string>
+    <string name="intGain">int_Gain</string>
+    <string name="moveSpeed">Move_Speed</string>
+
+    <string name="name">Name</string>
+    <string name="steamlink">steamlink</string>
+    <string name="favoriteHeroes">Favorite Heroes</string>
+    <string name="lastMatches">Last Matches</string>
+    <string name="rank">Rank : </string>
+    <string name="mmr">MMR : </string>
+    <string name="lastGame">Last game : </string>
+    <string name="country">Country : </string>
+    <string name="temprank">ranktier</string>
+    <string name="tempmmr">mmr</string>
+    <string name="templastGame">last game</string>
+    <string name="tempcountry">country</string>
+    <string name="playerPicture">Avatar</string>
+    <string name="addfav">Add Favorite Player</string>
+
+    <string name="defeats">Defeats</string>
+    <string name="wins">Wins</string>
+    <string name="ratio">Ratio</string>
+    <string name="games">Games</string>
+    <string name="idHero">id Hero</string>
+
+    <string name="winorlose">WINORLOSE</string>
+    <string name="idgame">id Game</string>
+    <string name="duration">duration</string>
+    <string name="xpm">XPM</string>
+    <string name="kda">KDAs</string>
+    <string name="win">Win</string>
+    <string name="defeat">Defeat</string>
+
+
 </resources>

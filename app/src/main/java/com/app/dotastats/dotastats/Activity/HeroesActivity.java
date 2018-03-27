@@ -4,19 +4,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
 import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.SearchHeroService;
-import com.app.dotastats.dotastats.SearchPlayerService;
+
+import java.util.ArrayList;
 
 // activity used when a user writes the name of a hero => the app displays to him each hero corresponding to what he wrote
 

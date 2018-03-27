@@ -1,6 +1,7 @@
 package com.app.dotastats.dotastats.Interfaces;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -17,4 +18,5 @@ public interface SearchPlayerInterface {
     void setName(String s);
     void setProgressBar(ProgressBar pBar);
     void setAdapter(PlayerAdapter a);
+    void setButton(Button b1,Button b2);
 }

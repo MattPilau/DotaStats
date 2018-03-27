@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="monospace"
-        android:text="Dota Stats"
+        android:text="@string/Title"
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
-        android:text="Find a player"
+        android:background="@android:color/holo_red_light"
+        android:padding="10dp"
+        android:text="@string/findPlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +55,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/logoDota"
@@ -63,7 +66,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/logo" />
 
     <Button
         android:id="@+id/findHero"
@@ -71,7 +75,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="32dp"
-        android:text="Find a Hero"
+        android:background="@android:color/holo_red_light"
+        android:padding="10dp"
+        android:text="@string/findHero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findPlayer" />
 
@@ -85,7 +91,8 @@
         android:inputType="textPersonName"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/namePlayerSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/namePlayerSearch"
+        tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/linkAllHeroes"
@@ -95,7 +102,8 @@
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameHeroSearch"
-        app:srcCompat="@drawable/pudge_icon" />
+        app:srcCompat="@drawable/pudge_icon"
+        android:contentDescription="@string/heroes" />
 
     <ImageView
         android:id="@+id/linkAllFavoritePlayers"
@@ -108,6 +116,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/linkAllHeroes"
         app:layout_constraintTop_toBottomOf="@+id/findHero"
-        app:srcCompat="@drawable/steamlogo" />
+        app:srcCompat="@drawable/steamlogo"
+        android:contentDescription="@string/players" />
 
 </android.support.constraint.ConstraintLayout>

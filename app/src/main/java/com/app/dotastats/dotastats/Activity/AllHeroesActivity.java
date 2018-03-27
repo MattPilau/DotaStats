@@ -4,25 +4,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.app.dotastats.dotastats.Adapters.AllHeroAdapter;
-import com.app.dotastats.dotastats.Adapters.PlayerAdapter;
+import com.app.dotastats.dotastats.AllHeroesService;
 import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.Beans.Heroes;
-import com.app.dotastats.dotastats.Beans.Player;
 import com.app.dotastats.dotastats.Interfaces.AllHeroesInterface;
-import com.app.dotastats.dotastats.AllHeroesService;
 import com.app.dotastats.dotastats.R;
-import com.app.dotastats.dotastats.SearchPlayerService;
 
 import java.util.ArrayList;
 
@@ -116,12 +112,4 @@ public class AllHeroesActivity extends AppCompatActivity {
         unbindService(maConnexion);
         stopService(new Intent(this,AllHeroesService.class));
     }
-
-
-
-
-
-
-
-
 }

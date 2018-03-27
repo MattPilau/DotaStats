@@ -4,26 +4,26 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.dotastats.dotastats.Adapters.PlayerAdapter;
 import com.app.dotastats.dotastats.Beans.Player;
-import com.app.dotastats.dotastats.Interfaces.SearchPlayerInterface;
 import com.app.dotastats.dotastats.Beans.Players;
+import com.app.dotastats.dotastats.Interfaces.SearchPlayerInterface;
 import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.SearchPlayerService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // activity used when a user writes the name of a player => the app displays to him each player corresponding to what he wrote
 
@@ -42,6 +42,7 @@ public class PlayersActivity extends AppCompatActivity {
             myBinder.setName(namePlayer);
             myBinder.setProgressBar((ProgressBar) findViewById(R.id.progressBar));
             myBinder.setAdapter(adapter);
+            myBinder.setButton((Button)findViewById(R.id.wifi),(Button)findViewById(R.id.refresh));
         }
 
         public void onServiceDisconnected(ComponentName name) { }
@@ -73,13 +74,37 @@ public class PlayersActivity extends AppCompatActivity {
         // get the name of the player
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
-        ((TextView)findViewById(R.id.namePlayer)).setText(((TextView)findViewById(R.id.namePlayer)).getText().toString() + namePlayer);
+        ((TextView)findViewById(R.id.namePlayer)).setText(((TextView)findViewById(R.id.namePlayer)).getText().toString() + " " + namePlayer);
+
+        findViewById(R.id.wifi).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                if (wifiManager != null) {
+                    wifiManager.setWifiEnabled(true);
+                }
+
+                Toast.makeText(getBaseContext(), "Waiting for Wifi ... ", Toast.LENGTH_SHORT).show();
+
+                (findViewById(R.id.refresh)).setEnabled(true);
+            }
+        });
+
+        findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopService(new Intent(getBaseContext(),SearchPlayerService.class));
+                Intent newTrySearch = new Intent(getBaseContext(),SearchPlayerService.class);
+                bindService(newTrySearch, maConnexion, Context.BIND_AUTO_CREATE);
+                startService(newTrySearch);
+            }
+        });
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
-        ((TextView)findViewById(R.id.namePlayer)).setText("Results for : ");
+        ((TextView)findViewById(R.id.namePlayer)).setText(R.string.results);
         request = false;
     }
 

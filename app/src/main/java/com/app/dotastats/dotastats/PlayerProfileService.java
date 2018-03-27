@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +34,9 @@ public class PlayerProfileService extends Service {
 
     private TaskProfile myTask;
     private TaskHero taskHero;
-    private  Player player;
+    private Player player;
     private ArrayList<View> views;
-    private  Matches matches;
+    private Matches matches;
     private MostPlayedHeroes mostPlayedHeroes;
     private FragmentManager fragmentManager;
 
@@ -101,11 +102,13 @@ public class PlayerProfileService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            (views.get(7)).setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            (views.get(7)).setVisibility(View.GONE);
 
             if(internetError)
                 Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
@@ -162,7 +165,7 @@ public class PlayerProfileService extends Service {
         }
     }
 
-    private static class TaskHero extends AsyncTask<Void, Void, Void> {
+    private class TaskHero extends AsyncTask<Void, Void, Void> {
         MostPlayedHeroes mostPlayedHeroes;
         FragmentManager fragmentManager;
         Player player;
@@ -176,11 +179,14 @@ public class PlayerProfileService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            (views.get(7)).setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+
+            (views.get(7)).setVisibility(View.GONE);
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             LastHeroesFragment lastHeroesFragment = new LastHeroesFragment();

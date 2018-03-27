@@ -21,7 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.021"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:contentDescription="@string/heroPictureDescription" />
 
     <TextView
         android:id="@+id/HeroName"
@@ -30,7 +31,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +42,7 @@
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Base_Health :"
+        android:text="@string/baseHealth"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/HeroName" />
 
@@ -51,7 +52,7 @@
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Base_Mana :"
+        android:text="@string/baseMana"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/BaseHealthDes" />
 
@@ -62,7 +63,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BaseHealthDes"
         app:layout_constraintTop_toBottomOf="@+id/HeroName" />
@@ -74,7 +75,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BaseManaDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseHealth" />
@@ -85,7 +86,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Attack_Range "
+        android:text="@string/attackRange"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/BaseManaDes" />
 
@@ -96,7 +97,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AttackRangeDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMana" />
@@ -107,7 +108,7 @@
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Attack_Rate"
+        android:text="@string/attackRate"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/AttackRangeDes" />
 
@@ -118,7 +119,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AttackRateDes"
         app:layout_constraintTop_toBottomOf="@+id/AttackRange" />
@@ -129,7 +130,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Base_Armor"
+        android:text="@string/baseArmor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
 
@@ -139,7 +140,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/BaseArmorDes"
         app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
 
@@ -149,7 +150,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Base_MR"
+        android:text="@string/baseMR"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseArmorDes" />
 
@@ -159,7 +160,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/BaseMrDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseArmor" />
 
@@ -169,7 +170,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Base_Str"
+        android:text="@string/baseSTR"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseMrDes" />
 
@@ -179,7 +180,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/BaseStrDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
 
@@ -189,7 +190,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Str_Gain"
+        android:text="@string/strGain"
         app:layout_constraintStart_toEndOf="@+id/BaseStr"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
 
@@ -200,7 +201,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/StrGainDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
@@ -211,7 +212,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Base_Agi"
+        android:text="@string/baseAgi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseStrDes" />
 
@@ -221,7 +222,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/BaseAgiDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseStr" />
 
@@ -231,7 +232,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Base_Int"
+        android:text="@string/baseInt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseAgiDes" />
 
@@ -241,7 +242,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/BaseIntDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseAgi" />
 
@@ -251,7 +252,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Agi_Gain"
+        android:text="@string/agiGain"
         app:layout_constraintStart_toEndOf="@+id/BaseAgi"
         app:layout_constraintTop_toBottomOf="@+id/StrGainDes" />
 
@@ -262,7 +263,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AgiGainDes"
         app:layout_constraintTop_toBottomOf="@+id/StrGain" />
@@ -273,7 +274,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Int_Gain"
+        android:text="@string/intGain"
         app:layout_constraintStart_toEndOf="@+id/BaseInt"
         app:layout_constraintTop_toBottomOf="@+id/AgiGainDes" />
 
@@ -284,7 +285,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/IntGainDes"
         app:layout_constraintTop_toBottomOf="@+id/AgiGain" />
@@ -295,7 +296,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Move_Speed"
+        android:text="@string/moveSpeed"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/AttackRateDes" />
 
@@ -305,7 +306,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintStart_toEndOf="@+id/MoveSpeedDes"
         app:layout_constraintTop_toBottomOf="@+id/AttackRate" />
 

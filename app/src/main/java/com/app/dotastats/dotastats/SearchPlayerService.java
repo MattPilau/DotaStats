@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class SearchPlayerService extends Service {
     private String namePlayer;
     private ProgressBar progressBar;
     private PlayerAdapter adapter;
+    private Button buttonWifi,buttonRefresh;
 
     public SearchPlayerService() {
     }
@@ -87,13 +89,17 @@ public class SearchPlayerService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            buttonWifi.setEnabled(false);
+            buttonRefresh.setEnabled(false);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            if(internetError)
+            if(internetError){
                 Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+                buttonWifi.setEnabled(true);
+            }
             else if(playerError)
                 Toast.makeText(getBaseContext(),"There isn't any player named "+name+" !", Toast.LENGTH_SHORT).show();
             else {
@@ -118,12 +124,13 @@ public class SearchPlayerService extends Service {
             }
 
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/search?q=" + name + "&similarity=1");
-            if(dataCleaned.equals("[]")){
-                playerError = true;
-                return null;
-            }
 
             try {
+
+                if(dataCleaned.equals("[]")){
+                    playerError = true;
+                    return null;
+                }
                 JSONArray data = new JSONArray(dataCleaned);
 
                 players.addAllValues(data);
@@ -147,5 +154,6 @@ public class SearchPlayerService extends Service {
         }
         public void setProgressBar(ProgressBar pBar){ progressBar = pBar; }
         public void setAdapter(PlayerAdapter a){ adapter = a ;}
+        public void setButton(Button b1,Button b2){buttonWifi = b1;buttonRefresh = b2;}
     }
 }

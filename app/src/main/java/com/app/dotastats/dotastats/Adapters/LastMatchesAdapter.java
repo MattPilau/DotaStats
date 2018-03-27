@@ -2,6 +2,7 @@ package com.app.dotastats.dotastats.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,9 @@ public class LastMatchesAdapter extends ArrayAdapter<Match>{
         super(context, 0, matches);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_last_matches,parent, false);
@@ -56,11 +58,11 @@ public class LastMatchesAdapter extends ArrayAdapter<Match>{
 
         if(win){
             matchHolder.winOrLose.setTextColor(Color.parseColor("#64d176"));
-            matchHolder.winOrLose.setText("Win");
+            matchHolder.winOrLose.setText(R.string.win);
         }
         else{
             matchHolder.winOrLose.setTextColor(Color.parseColor("#b20c0c"));
-            matchHolder.winOrLose.setText("Defeat");
+            matchHolder.winOrLose.setText(R.string.defeat);
         }
 
         return convertView;
