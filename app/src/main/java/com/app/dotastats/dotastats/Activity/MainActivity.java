@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
 import com.app.dotastats.dotastats.R;
+import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         //UtilsPreferences.clearFavoritePlayers(getApplicationContext());
+
         Intent intentService = new Intent(getApplicationContext(), FavoritePlayerLastGameService.class);
         startService(intentService);
 

@@ -3,6 +3,7 @@ package com.app.dotastats.dotastats.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.app.dotastats.dotastats.Beans.Player;
 
@@ -28,6 +29,8 @@ public class UtilsPreferences {
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        Boolean alreadyRemoved = false;
+
         ArrayList<Player> players = getAllFavoritePlayers(context);
         if(players.size() > 0){
             for(int i = 0 ; i < players.size(); i++){
@@ -39,7 +42,20 @@ public class UtilsPreferences {
                     editor.putInt("nbFavoritePlayers",players.size()-1);
 
                     editor.apply();
-                    break;
+                    alreadyRemoved = true;
+                }
+                else if(alreadyRemoved){
+                    editor.putString("FavoritePlayer"+Integer.toString(i)+"Name", players.get(i).getName());
+                    editor.putString("FavoritePlayer"+Integer.toString(i)+"id", players.get(i).getId());
+                    editor.putString("FavoritePlayer"+Integer.toString(i)+"lastPlayed", players.get(i).getLastPlayed());
+                    editor.putString("FavoritePlayer"+Integer.toString(i)+"idLastGame", players.get(i).getIdLastGame());
+
+                    editor.putString("FavoritePlayer"+Integer.toString(i+1)+"Name", null);
+                    editor.putString("FavoritePlayer"+Integer.toString(i+1)+"id", null);
+                    editor.putString("FavoritePlayer"+Integer.toString(i+1)+"lastPlayed", null);
+                    editor.putString("FavoritePlayer"+Integer.toString(i+1)+"idLastGame", null);
+
+                    editor.apply();
                 }
             }
         }

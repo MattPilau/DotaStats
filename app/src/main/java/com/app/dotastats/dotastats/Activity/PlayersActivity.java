@@ -71,7 +71,7 @@ public class PlayersActivity extends AppCompatActivity {
         // get the name of the player
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
-        String s = R.string.results + " " + namePlayer;
+        String s = getString(R.string.results) + " " + namePlayer;
         ((TextView)findViewById(R.id.namePlayer)).setText(s);
 
         findViewById(R.id.wifi).setOnClickListener(new View.OnClickListener() {
