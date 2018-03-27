@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -11,7 +12,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.app.dotastats.dotastats.Activity.PlayerProfileActivity;
@@ -78,6 +78,7 @@ public class FavoritePlayerLastGameService extends Service {
         doAsynchronousTask.cancel();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class BackgroundRequestTask extends AsyncTask<Void, Void, Void> {
 
         int i;
@@ -135,7 +136,7 @@ public class FavoritePlayerLastGameService extends Service {
 
                     long unixSeconds = array.getJSONObject(0).getLong("start_time");
                     Date date = new java.util.Date(unixSeconds*1000L);
-                    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy - MM - dd");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy - MM - dd");
                     String lastPlayed = sdf.format(date);
 
                     UtilsPreferences.updateLastGame(getBaseContext(),i,idLastGame,lastPlayed);

@@ -8,10 +8,6 @@ import com.app.dotastats.dotastats.Beans.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by Matt on 08/03/2018.
- */
-
 public class UtilsPreferences {
 
     public static void addNewPlayerToListFavorite(Context context,Player player){

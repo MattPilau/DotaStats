@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -9,28 +10,22 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimerTask;
-
-import com.app.dotastats.dotastats.Activity.PlayerProfileActivity;
 import com.app.dotastats.dotastats.Adapters.PlayerAdapter;
 import com.app.dotastats.dotastats.Beans.Player;
 import com.app.dotastats.dotastats.Beans.Players;
 import com.app.dotastats.dotastats.Interfaces.SearchPlayerInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.TimerTask;
 
 public class SearchPlayerService extends Service {
 
@@ -73,6 +68,7 @@ public class SearchPlayerService extends Service {
         task.cancel();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MyTask extends AsyncTask<Void, Void, Void> {
 
         Players players;

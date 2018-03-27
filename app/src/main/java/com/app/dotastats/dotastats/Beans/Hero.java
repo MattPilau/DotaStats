@@ -10,10 +10,6 @@ import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 import java.io.IOException;
 
-/**
- * Created by Alexis on 11/03/2018.
- */
-
 public class Hero {
 
     private int id;
@@ -22,7 +18,6 @@ public class Hero {
     private String attack_type;
 
     private Bitmap image;
-    //private Bitmap icon;
 
     private double base_health;
     private double base_mana;
@@ -47,53 +42,50 @@ public class Hero {
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
 
-    public String getAttack_Type() {return attack_type;}
-    public void setAttack_Type(String attack_type) {this.attack_type = attack_type;}
+    private String getAttack_Type() {return attack_type;}
+    private void setAttack_Type(String attack_type) {this.attack_type = attack_type;}
 
     public Bitmap getImage() {return image;}
     public void setImage(Bitmap image) {this.image = image;}
 
-    //public Bitmap getIcon() {return icon;}
-    //public void setIcon(Bitmap icon) {this.icon = icon;}
-
     public double getBase_health() {return base_health;}
-    public void setBase_health(double base_health) {this.base_health = base_health;}
+    private void setBase_health(double base_health) {this.base_health = base_health;}
 
     public double getBase_mana() {return base_mana;}
-    public void setBase_mana(double base_mana) {this.base_mana = base_mana;}
+    private void setBase_mana(double base_mana) {this.base_mana = base_mana;}
 
     public double getBase_armor() {return base_armor;}
-    public void setBase_armor(double base_armor) {this.base_armor = base_armor;}
+    private void setBase_armor(double base_armor) {this.base_armor = base_armor;}
 
     public double getBase_mr() {return base_mr;}
-    public void setBase_mr(double base_mr) {this.base_mr = base_mr;}
+    private void setBase_mr(double base_mr) {this.base_mr = base_mr;}
 
     public double getBase_str() {return base_str;}
-    public void setBase_str(double base_str) {this.base_str = base_str;}
+    private void setBase_str(double base_str) {this.base_str = base_str;}
 
     public double getBase_agi() {return base_agi;}
-    public void setBase_agi(double base_agi) {this.base_agi = base_agi;}
+    private void setBase_agi(double base_agi) {this.base_agi = base_agi;}
 
     public double getBase_int() {return base_int;}
-    public void setBase_int(double base_int) {this.base_int = base_int;}
+    private void setBase_int(double base_int) {this.base_int = base_int;}
 
     public double getStr_gain() {return str_gain;}
-    public void setStr_gain(double str_gain) {this.str_gain = str_gain;}
+    private void setStr_gain(double str_gain) {this.str_gain = str_gain;}
 
     public double getAgi_gain() {return agi_gain;}
-    public void setAgi_gain(double agi_gain) {this.agi_gain = agi_gain;}
+    private void setAgi_gain(double agi_gain) {this.agi_gain = agi_gain;}
 
     public double getInt_gain() {return int_gain;}
-    public void setInt_gain(double int_gain) {this.int_gain = int_gain;}
+    private void setInt_gain(double int_gain) {this.int_gain = int_gain;}
 
     public double getAttack_range() {return attack_range;}
-    public void setAttack_range(double attack_range) {this.attack_range = attack_range;}
+    private void setAttack_range(double attack_range) {this.attack_range = attack_range;}
 
     public double getAttack_rate() {return attack_rate;}
-    public void setAttack_rate(double attack_rate) {this.attack_rate = attack_rate;}
+    private void setAttack_rate(double attack_rate) {this.attack_rate = attack_rate;}
 
     public double getMove_speed() {return move_speed;}
-    public void setMove_speed(double move_speed) {this.move_speed = move_speed;}
+    private void setMove_speed(double move_speed) {this.move_speed = move_speed;}
 
     public void displayHero(){
         System.out.println(name);
@@ -130,7 +122,7 @@ public class Hero {
 
                     String url = temp.getString("img");
                     try{
-                        Bitmap img = new UtilsHttp().getHeroImage(url);
+                        Bitmap img = UtilsHttp.getHeroImage(url);
                         this.setImage(img);
                     }
                     catch (IOException e){

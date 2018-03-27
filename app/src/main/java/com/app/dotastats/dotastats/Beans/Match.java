@@ -1,9 +1,5 @@
 package com.app.dotastats.dotastats.Beans;
 
-/**
- * Created by Matt on 14/03/2018.
- */
-
 public class Match {
     private String matchId;
     private Boolean win;
@@ -19,7 +15,7 @@ public class Match {
         return matchId;
     }
 
-    public void setMatchId(String matchId) {
+    void setMatchId(String matchId) {
         this.matchId = matchId;
     }
 
@@ -27,7 +23,7 @@ public class Match {
         return win;
     }
 
-    public void setWin(Boolean win) {
+    void setWin(Boolean win) {
         this.win = win;
     }
 
@@ -35,7 +31,7 @@ public class Match {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -43,7 +39,7 @@ public class Match {
         return heroId;
     }
 
-    public void setHeroId(int heroId) {
+    void setHeroId(int heroId) {
         this.heroId = heroId;
     }
 
@@ -51,7 +47,7 @@ public class Match {
         return kills;
     }
 
-    public void setKills(int kills) {
+    void setKills(int kills) {
         this.kills = kills;
     }
 
@@ -59,7 +55,7 @@ public class Match {
         return deaths;
     }
 
-    public void setDeaths(int deaths) {
+    void setDeaths(int deaths) {
         this.deaths = deaths;
     }
 
@@ -67,7 +63,7 @@ public class Match {
         return assists;
     }
 
-    public void setAssists(int assists) {
+    void setAssists(int assists) {
         this.assists = assists;
     }
 
@@ -75,7 +71,7 @@ public class Match {
         return xpMin;
     }
 
-    public void setXpMin(int xpMin) {
+    void setXpMin(int xpMin) {
         this.xpMin = xpMin;
     }
 
@@ -83,7 +79,7 @@ public class Match {
         return goldMin;
     }
 
-    public void setGoldMin(int goldMin) {
+    void setGoldMin(int goldMin) {
         this.goldMin = goldMin;
     }
 }

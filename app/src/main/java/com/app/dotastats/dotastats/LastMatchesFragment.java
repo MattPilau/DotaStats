@@ -9,11 +9,6 @@ import android.view.ViewGroup;
 import com.app.dotastats.dotastats.Adapters.LastMatchesAdapter;
 import com.app.dotastats.dotastats.Beans.Matches;
 
-
-/**
- * Created by Matt on 11/03/2018.
- */
-
 public class LastMatchesFragment extends ListFragment {
 
     Matches matches;

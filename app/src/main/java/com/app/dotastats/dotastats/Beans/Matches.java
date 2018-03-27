@@ -2,20 +2,14 @@ package com.app.dotastats.dotastats.Beans;
 
 import android.util.Log;
 
-import com.app.dotastats.dotastats.Beans.Match;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Matt on 14/03/2018.
- */
-
 public class Matches {
-    ArrayList<Match> matches;
+    private ArrayList<Match> matches;
 
     public Matches(){
         matches = new ArrayList<>();
@@ -70,7 +64,7 @@ public class Matches {
         display();
     }
 
-    public void display(){
+    private void display(){
         for(int i = 0; i < matches.size(); i++){
             Log.i("test",matches.get(i).getMatchId() + " - " + matches.get(i).getWin());
         }

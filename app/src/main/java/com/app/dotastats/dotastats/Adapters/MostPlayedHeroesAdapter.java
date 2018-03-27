@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -15,16 +16,13 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.List;
 
-/**
- * Created by Matt on 15/03/2018.
- */
-
 public class MostPlayedHeroesAdapter extends ArrayAdapter<MostPlayedHero>{
 
     public MostPlayedHeroesAdapter(Context context, List<MostPlayedHero> mostPlayedHeroes) {
         super(context, 0, mostPlayedHeroes);
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -47,25 +45,48 @@ public class MostPlayedHeroesAdapter extends ArrayAdapter<MostPlayedHero>{
         }
 
         MostPlayedHero mostPlayedHero = getItem(position);
-        heroHolder.attribute.setText(mostPlayedHero.getPrimaryAttribute());
-        heroHolder.nameHero.setText(mostPlayedHero.getName());
-        heroHolder.wins.setText(Integer.toString(mostPlayedHero.getWins()) + " wins");
-        heroHolder.defeats.setText(Integer.toString(mostPlayedHero.getDefeats()) + " defeats");
-        heroHolder.ratio.setText(Double.toString(mostPlayedHero.getRatio()) + "%");
-        heroHolder.games.setText(Integer.toString(mostPlayedHero.getGames()));
-        heroHolder.icon.setImageBitmap(mostPlayedHero.getIcon());
+        if (mostPlayedHero != null) {
+            heroHolder.attribute.setText(mostPlayedHero.getPrimaryAttribute());
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.nameHero.setText(mostPlayedHero.getName());
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.wins.setText(String.format("%s wins", Integer.toString(mostPlayedHero.getWins())));
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.defeats.setText(Integer.toString(mostPlayedHero.getDefeats()) + " defeats");
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.ratio.setText(Double.toString(mostPlayedHero.getRatio()) + "%");
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.games.setText(Integer.toString(mostPlayedHero.getGames()));
+        }
+        if (mostPlayedHero != null) {
+            heroHolder.icon.setImageBitmap(mostPlayedHero.getIcon());
+        }
 
-        if(mostPlayedHero.getRatio() > 50.0)
-            heroHolder.ratio.setTextColor(Color.parseColor("#64d176"));
-        else
-            heroHolder.ratio.setTextColor(Color.parseColor("#b20c0c"));
+        if (mostPlayedHero != null) {
+            if(mostPlayedHero.getRatio() > 50.0)
+                heroHolder.ratio.setTextColor(Color.parseColor("#64d176"));
+            else
+                heroHolder.ratio.setTextColor(Color.parseColor("#b20c0c"));
+        }
 
-        if(mostPlayedHero.getPrimaryAttribute().equals("str"))
-            heroHolder.attribute.setTextColor(Color.parseColor("#960f0f"));
-        else if (mostPlayedHero.getPrimaryAttribute().equals("agi"))
-            heroHolder.attribute.setTextColor(Color.parseColor("#218436"));
-        else
-            heroHolder.attribute.setTextColor(Color.parseColor("#493bcc"));
+        if (mostPlayedHero != null) {
+            switch (mostPlayedHero.getPrimaryAttribute()) {
+                case "str":
+                    heroHolder.attribute.setTextColor(Color.parseColor("#960f0f"));
+                    break;
+                case "agi":
+                    heroHolder.attribute.setTextColor(Color.parseColor("#218436"));
+                    break;
+                default:
+                    heroHolder.attribute.setTextColor(Color.parseColor("#493bcc"));
+                    break;
+            }
+        }
 
         return convertView;
     }

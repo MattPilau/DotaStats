@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 import com.app.dotastats.dotastats.Adapters.MostPlayedHeroesAdapter;
 import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
 
-/**
- * Created by Matt on 11/03/2018.
- */
-
 public class LastHeroesFragment extends ListFragment {
 
     MostPlayedHeroes mostPlayedHeroes;

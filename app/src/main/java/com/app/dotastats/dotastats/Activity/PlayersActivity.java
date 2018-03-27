@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.app.dotastats.dotastats.Adapters.PlayerAdapter;
 import com.app.dotastats.dotastats.Beans.Player;
-import com.app.dotastats.dotastats.Beans.Players;
 import com.app.dotastats.dotastats.Interfaces.SearchPlayerInterface;
 import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.SearchPlayerService;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 
 public class PlayersActivity extends AppCompatActivity {
 
-    private Players players;
     private String namePlayer;
     private PlayerAdapter adapter;
     private Boolean request;
@@ -38,7 +36,6 @@ public class PlayersActivity extends AppCompatActivity {
 
         public void onServiceConnected(ComponentName name, IBinder service) {
             SearchPlayerInterface myBinder = (SearchPlayerInterface) service;
-            players = myBinder.getPlayers();
             myBinder.setName(namePlayer);
             myBinder.setProgressBar((ProgressBar) findViewById(R.id.progressBar));
             myBinder.setAdapter(adapter);
@@ -56,7 +53,7 @@ public class PlayersActivity extends AppCompatActivity {
         request = true;
 
         // RecyclerView adapter needs to be created at this point, and will be updated once the data are received from the API
-        adapter = new PlayerAdapter(getBaseContext(),new ArrayList<Player>());
+        adapter = new PlayerAdapter(new ArrayList<Player>());
         ((RecyclerView) findViewById(R.id.list)).setAdapter(adapter);
         ((RecyclerView) findViewById(R.id.list)).setLayoutManager(new LinearLayoutManager(getBaseContext()));
     }
@@ -74,7 +71,8 @@ public class PlayersActivity extends AppCompatActivity {
         // get the name of the player
         Intent intent = getIntent();
         namePlayer = intent.getStringExtra("namePlayer");
-        ((TextView)findViewById(R.id.namePlayer)).setText(((TextView)findViewById(R.id.namePlayer)).getText().toString() + " " + namePlayer);
+        String s = R.string.results + " " + namePlayer;
+        ((TextView)findViewById(R.id.namePlayer)).setText(s);
 
         findViewById(R.id.wifi).setOnClickListener(new View.OnClickListener() {
             @Override

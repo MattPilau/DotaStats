@@ -14,10 +14,6 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.List;
 
-/**
- * Created by Matt on 14/03/2018.
- */
-
 public class LastMatchesAdapter extends ArrayAdapter<Match>{
 
     public LastMatchesAdapter(Context context, List<Match> matches) {
@@ -45,15 +41,30 @@ public class LastMatchesAdapter extends ArrayAdapter<Match>{
 
         Match match = getItem(position);
 
-        Boolean win = match.getWin();
-        matchHolder.idGame.setText(match.getMatchId());
-        matchHolder.winOrLose.setText(win.toString());
-        matchHolder.duration.setText(match.getDuration());
+        Boolean win = false;
+        if (match != null) {
+            win = match.getWin();
+        }
+        if (match != null) {
+            matchHolder.idGame.setText(match.getMatchId());
+        }
+        if (win != null) {
+            matchHolder.winOrLose.setText(win.toString());
+        }
+        if (match != null) {
+            matchHolder.duration.setText(match.getDuration());
+        }
 
-        String kda = Integer.toString(match.getKills()) + " / " + Integer.toString(match.getDeaths()) + " / " + Integer.toString(match.getAssists());
+        String kda = null;
+        if (match != null) {
+            kda = Integer.toString(match.getKills()) + " / " + Integer.toString(match.getDeaths()) + " / " + Integer.toString(match.getAssists());
+        }
         matchHolder.kda.setText(kda);
 
-        String xpm = Integer.toString(match.getGoldMin()) + " gpm / " + Integer.toString(match.getXpMin()) + " xpm";
+        String xpm = null;
+        if (match != null) {
+            xpm = Integer.toString(match.getGoldMin()) + " gpm / " + Integer.toString(match.getXpMin()) + " xpm";
+        }
         matchHolder.xpm.setText(xpm);
 
         if(win){

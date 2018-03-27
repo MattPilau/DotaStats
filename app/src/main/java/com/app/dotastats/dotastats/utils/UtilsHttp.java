@@ -12,14 +12,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by Matt on 06/03/2018.
- */
-
 public class UtilsHttp {
 
     // performs the actual request to the API
-    public static String request(URL url) throws IOException {
+    private static String request(URL url) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -34,7 +30,7 @@ public class UtilsHttp {
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         String inputLine;
-        StringBuffer content = new StringBuffer();
+        StringBuilder content = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             content.append(inputLine);
         }
@@ -58,7 +54,7 @@ public class UtilsHttp {
         String dataCleaned = null;
         try {
             // executes the http request, connects to the API
-            dataCleaned = new UtilsHttp().request(url);
+            dataCleaned = UtilsHttp.request(url);
         } catch (IOException e) {
             e.printStackTrace();
         }

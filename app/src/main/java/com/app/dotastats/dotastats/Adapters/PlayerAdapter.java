@@ -1,6 +1,5 @@
 package com.app.dotastats.dotastats.Adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -17,15 +16,11 @@ import com.app.dotastats.dotastats.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Matt on 04/03/2018.
- */
-
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.MyViewHolder> {
 
     private ArrayList<Player> players ;
 
-    public PlayerAdapter(Context context, List<Player> players) {
+    public PlayerAdapter(List<Player> players) {
         super();
         this.players = (ArrayList<Player>) players;
     }

@@ -9,10 +9,6 @@ import java.io.IOException;
 
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
-/**
- * Created by Mamie_Chiffons77 on 04/03/2018.
- */
-
 public class Player {
     private String name;
     private String lastPlayed;
@@ -33,16 +29,16 @@ public class Player {
     }
 
     public String getSteamLink() {return steamLink;}
-    public void setSteamLink(String steamLink) {this.steamLink = steamLink;}
+    private void setSteamLink(String steamLink) {this.steamLink = steamLink;}
 
     public String getCountry() {return country;}
-    public void setCountry(String country) {this.country = country;}
+    private void setCountry(String country) {this.country = country;}
 
     public String getMmr() {return mmr;}
-    public void setMmr(String mmr) {this.mmr = mmr;}
+    private void setMmr(String mmr) {this.mmr = mmr;}
 
     public String getRankTier() {return rankTier;}
-    public void setRankTier(String rankTier) {this.rankTier = rankTier;}
+    private void setRankTier(String rankTier) {this.rankTier = rankTier;}
 
     public String getId() {return id;}
     public void setId(String id) {
@@ -52,7 +48,7 @@ public class Player {
     public Bitmap getAvatar() {
         return avatar;
     }
-    public void setAvatar(Bitmap avatar) {
+    void setAvatar(Bitmap avatar) {
         this.avatar = avatar;
     }
 
@@ -79,6 +75,6 @@ public class Player {
         this.setRankTier(object.getString("rank_tier"));
         if(rankTier.equals("null"))
             setRankTier("Unranked");
-        this.setAvatar(new UtilsHttp().getPicture(profile.getString("avatarfull")));
+        this.setAvatar(UtilsHttp.getPicture(profile.getString("avatarfull")));
     }
 }

@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.Service;
@@ -13,9 +14,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.dotastats.dotastats.Beans.Matches;
+import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
+import com.app.dotastats.dotastats.Beans.Player;
+import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,12 +29,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.app.dotastats.dotastats.Beans.Matches;
-import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
-import com.app.dotastats.dotastats.Beans.Player;
-import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
-import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class PlayerProfileService extends Service {
 
@@ -85,6 +85,7 @@ public class PlayerProfileService extends Service {
             taskHero.cancel(true);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class TaskProfile extends AsyncTask<Void, Void, Void> {
         Player player;
         ArrayList<View> views;
@@ -165,6 +166,7 @@ public class PlayerProfileService extends Service {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class TaskHero extends AsyncTask<Void, Void, Void> {
         MostPlayedHeroes mostPlayedHeroes;
         FragmentManager fragmentManager;

@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +62,7 @@ public class SearchHeroService extends Service {
         task.cancel();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MyTask extends AsyncTask<Void, Void, Void> {
 
         Hero hero;
@@ -77,6 +79,7 @@ public class SearchHeroService extends Service {
             super.onPreExecute();
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);

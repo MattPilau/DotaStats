@@ -6,28 +6,24 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
-import com.app.dotastats.dotastats.LastHeroesFragment;
-import com.app.dotastats.dotastats.LastMatchesFragment;
 import com.app.dotastats.dotastats.Beans.Matches;
 import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
 import com.app.dotastats.dotastats.Beans.Player;
+import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
+import com.app.dotastats.dotastats.LastHeroesFragment;
+import com.app.dotastats.dotastats.LastMatchesFragment;
 import com.app.dotastats.dotastats.PlayerProfileService;
 import com.app.dotastats.dotastats.R;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
+
+import java.util.ArrayList;
 
 public class PlayerProfileActivity extends AppCompatActivity {
     private Player player;

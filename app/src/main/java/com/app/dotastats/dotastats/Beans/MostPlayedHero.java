@@ -2,10 +2,6 @@ package com.app.dotastats.dotastats.Beans;
 
 import android.graphics.Bitmap;
 
-/**
- * Created by Matt on 15/03/2018.
- */
-
 public class MostPlayedHero{
     private int idHero;
     private String primaryAttribute;
@@ -43,7 +39,7 @@ public class MostPlayedHero{
         return games;
     }
 
-    public void setGames(int games) {
+    void setGames(int games) {
         this.games = games;
     }
 
@@ -51,7 +47,7 @@ public class MostPlayedHero{
         return wins;
     }
 
-    public void setWins(int wins) {
+    void setWins(int wins) {
         this.wins = wins;
     }
 
@@ -59,15 +55,15 @@ public class MostPlayedHero{
         return defeats;
     }
 
-    public void setDefeats(int defeats) {
+    void setDefeats(int defeats) {
         this.defeats = defeats;
     }
 
-    public int getIdHero() {
+    int getIdHero() {
         return idHero;
     }
 
-    public void setIdHero(int idHero) {
+    void setIdHero(int idHero) {
         this.idHero = idHero;
     }
 
@@ -75,7 +71,7 @@ public class MostPlayedHero{
         return primaryAttribute;
     }
 
-    public void setPrimaryAttribute(String primaryAttribute) {
+    void setPrimaryAttribute(String primaryAttribute) {
         this.primaryAttribute = primaryAttribute;
     }
 }

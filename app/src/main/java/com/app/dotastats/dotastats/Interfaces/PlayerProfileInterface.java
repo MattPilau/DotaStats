@@ -9,9 +9,6 @@ import com.app.dotastats.dotastats.Beans.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by Matt on 06/03/2018.
- */
 
 public interface PlayerProfileInterface {
     void setPlayer(Player p);

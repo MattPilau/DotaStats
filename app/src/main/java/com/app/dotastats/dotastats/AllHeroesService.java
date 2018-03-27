@@ -1,5 +1,6 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +11,17 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.app.dotastats.dotastats.Adapters.AllHeroAdapter;
+import com.app.dotastats.dotastats.Beans.Hero;
+import com.app.dotastats.dotastats.Beans.Heroes;
+import com.app.dotastats.dotastats.Interfaces.AllHeroesInterface;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
+import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,16 +29,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TimerTask;
-
-import com.app.dotastats.dotastats.Activity.HeroesActivity;
-import com.app.dotastats.dotastats.Adapters.AllHeroAdapter;
-import com.app.dotastats.dotastats.Beans.Hero;
-import com.app.dotastats.dotastats.Beans.Heroes;
-import com.app.dotastats.dotastats.Interfaces.AllHeroesInterface;
-import com.app.dotastats.dotastats.utils.UtilsHttp;
-import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class AllHeroesService extends Service {
 
@@ -75,6 +71,7 @@ public class AllHeroesService extends Service {
         task.cancel();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MyTask extends AsyncTask<Void, Integer, Void> {
 
         private Heroes heroes;
@@ -143,7 +140,7 @@ public class AllHeroesService extends Service {
                                     Bitmap img = UtilsHttp.getHeroImage(url);
 
                                     heroes.addIntoList(name, img);
-                                    publishProgress(new Integer(i));
+                                    publishProgress(i);
 
                                     isIn = true;
                                 }
@@ -166,7 +163,7 @@ public class AllHeroesService extends Service {
                             Bitmap img = UtilsHttp.getHeroImage(url);
 
                             heroes.addIntoList(name, img);
-                            publishProgress(new Integer(i));
+                            publishProgress(i);
                         }
                         catch (JSONException|IOException e){
                             e.printStackTrace();

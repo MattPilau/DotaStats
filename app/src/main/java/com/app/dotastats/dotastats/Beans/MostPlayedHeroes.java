@@ -1,6 +1,5 @@
 package com.app.dotastats.dotastats.Beans;
 
-import com.app.dotastats.dotastats.Beans.MostPlayedHero;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 import org.json.JSONArray;
@@ -10,20 +9,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Matt on 15/03/2018.
- */
 
 public class MostPlayedHeroes {
 
-    ArrayList<MostPlayedHero> mostPlayedHeroes;
+    private ArrayList<MostPlayedHero> mostPlayedHeroes = new ArrayList<>();
 
     public ArrayList<MostPlayedHero> getMostPlayedHeroes() {
         return mostPlayedHeroes;
     }
 
     public MostPlayedHeroes(){
-        mostPlayedHeroes = new ArrayList<>();
     }
 
     public void addNewHeroes(JSONArray array){
@@ -58,7 +53,7 @@ public class MostPlayedHeroes {
                              // it probably was removed from the game
                 JSONObject temp = array.getJSONObject(index);
                 mostPlayedHero.setName(temp.getString("localized_name"));
-                mostPlayedHero.setIcon(new UtilsHttp().getHeroImage(temp.getString("img")));
+                mostPlayedHero.setIcon(UtilsHttp.getHeroImage(temp.getString("img")));
                 mostPlayedHero.setPrimaryAttribute(temp.getString("primary_attr"));
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
