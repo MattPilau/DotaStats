@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.app.dotastats.dotastats.Adapters.LastMatchesAdapter;
 import com.app.dotastats.dotastats.Beans.Matches;
+import com.app.dotastats.dotastats.MatchActivity;
 
 public class LastMatchesFragment extends ListFragment {
 

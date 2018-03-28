@@ -46,6 +46,13 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity android:name=".MatchActivity" />
+
+        <service
+            android:name=".MatchService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity android:name=".Activity.FavoritePlayersActivity" />
 
         <service
