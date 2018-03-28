@@ -1,15 +1,14 @@
 package com.app.dotastats.dotastats.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
 import com.app.dotastats.dotastats.R;
-import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 public class MainActivity extends AppCompatActivity {
 

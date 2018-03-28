@@ -91,7 +91,7 @@ public class PlayerProfileService extends Service {
         ArrayList<View> views;
         Matches matches;
         FragmentManager fragmentManager;
-        private Boolean internetError = false;
+        private Boolean internetError = false, playerError = false;
 
         TaskProfile(Player p,ArrayList<View> v, Matches m,FragmentManager manager){
             player = p;
@@ -113,6 +113,8 @@ public class PlayerProfileService extends Service {
 
             if(internetError)
                 Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
+            if(playerError)
+                Toast.makeText(getBaseContext(), "Impossible to reach the API at the moment ...", Toast.LENGTH_SHORT).show();
             else {
                 ((TextView) views.get(0)).setText(player.getName()); // name
                 ((TextView) views.get(1)).setText(player.getLastPlayed()); // last played
@@ -143,9 +145,12 @@ public class PlayerProfileService extends Service {
                 return null;
             }
 
-
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId());
 
+            if(dataCleaned == null){
+                playerError = true;
+                return null;
+            }
             try {
                 JSONObject data = new JSONObject(dataCleaned);
                 player.editProfilePlayer(data);
@@ -155,6 +160,10 @@ public class PlayerProfileService extends Service {
 
             dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/"+player.getId()+"/recentMatches");
 
+            if(dataCleaned == null){
+                playerError = true;
+                return null;
+            }
             try {
                 JSONArray data = new JSONArray(dataCleaned);
                 matches.editLastMatches(data);
