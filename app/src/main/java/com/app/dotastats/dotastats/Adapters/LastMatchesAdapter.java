@@ -26,6 +26,7 @@ public class LastMatchesAdapter extends ArrayAdapter<Match>{
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_last_matches,parent, false);
+
         }
 
         MatchHolder matchHolder = (MatchHolder) convertView.getTag();

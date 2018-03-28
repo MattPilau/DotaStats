@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/playerImage"
+        android:layout_width="103dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playerName"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/playerImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/kills_des"
+        android:layout_width="82dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Kills :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerImage" />
+
+    <TextView
+        android:id="@+id/kills"
+        android:layout_width="103dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/kills_des"
+        app:layout_constraintTop_toBottomOf="@+id/playerImage" />
+
+    <TextView
+        android:id="@+id/deaths_des"
+        android:layout_width="85dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Deaths :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kills_des" />
+
+    <TextView
+        android:id="@+id/deaths"
+        android:layout_width="99dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/deaths_des"
+        app:layout_constraintTop_toBottomOf="@+id/kills" />
+
+    <TextView
+        android:id="@+id/assists_des"
+        android:layout_width="85dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Assists :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deaths_des" />
+
+    <TextView
+        android:id="@+id/assists"
+        android:layout_width="98dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/assists_des"
+        app:layout_constraintTop_toBottomOf="@+id/deaths" />
+
+    <TextView
+        android:id="@+id/gpm_des"
+        android:layout_width="87dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Gold per min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assists_des" />
+
+    <TextView
+        android:id="@+id/gpm"
+        android:layout_width="96dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/gpm_des"
+        app:layout_constraintTop_toBottomOf="@+id/assists" />
+
+    <TextView
+        android:id="@+id/xppm_des"
+        android:layout_width="85dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="XP per min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gpm_des" />
+
+    <TextView
+        android:id="@+id/xppm"
+        android:layout_width="97dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/xppm_des"
+        app:layout_constraintTop_toBottomOf="@+id/gpm" />
+
+    <TextView
+        android:id="@+id/heroDmg_des"
+        android:layout_width="87dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Hero Damage :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xppm_des" />
+
+    <TextView
+        android:id="@+id/heroDamage"
+        android:layout_width="93dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/heroDmg_des"
+        app:layout_constraintTop_toBottomOf="@+id/xppm" />
+
+    <TextView
+        android:id="@+id/heroHealing_des"
+        android:layout_width="83dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Hero Healing :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heroDmg_des" />
+
+    <TextView
+        android:id="@+id/heroHealing"
+        android:layout_width="93dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/heroHealing_des"
+        app:layout_constraintTop_toBottomOf="@+id/heroDamage" />
+</android.support.constraint.ConstraintLayout>

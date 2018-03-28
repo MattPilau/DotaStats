@@ -19,6 +19,8 @@ public class Matches {
         return matches;
     }
 
+    public Match getMatch(int position) {return matches.get(position);}
+
     public void setMatches(ArrayList<Match> matches) {
         this.matches = matches;
     }
