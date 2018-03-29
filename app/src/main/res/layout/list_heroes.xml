@@ -18,11 +18,13 @@
 
     <TextView
         android:id="@+id/Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="163dp"
+        android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/Image"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -26,8 +26,6 @@ public class MatchActivity extends AppCompatActivity {
     private PlayerStat player;
     private String idMatch;
     FragmentManager fragmentManager;
-    //ArrayList<View> views = new ArrayList<>();
-
 
     private ServiceConnection maConnexion = new ServiceConnection(){
 

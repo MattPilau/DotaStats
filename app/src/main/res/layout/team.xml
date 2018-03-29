@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#31323d">
 
     <ImageView
         android:id="@+id/playerImage"
         android:layout_width="54dp"
         android:layout_height="52dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/playerName"
@@ -20,6 +22,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="Unknown"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/playerImage"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

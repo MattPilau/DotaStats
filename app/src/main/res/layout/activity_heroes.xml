@@ -14,24 +14,25 @@
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="64dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:contentDescription="@string/heroPictureDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.021"
-        app:srcCompat="@android:drawable/btn_dialog"
-        android:contentDescription="@string/heroPictureDescription" />
+        app:srcCompat="@android:drawable/btn_dialog" />
 
     <TextView
         android:id="@+id/HeroName"
-        android:layout_width="96dp"
-        android:layout_height="40dp"
+        android:layout_width="182dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,8 +42,10 @@
         android:layout_width="88dp"
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/baseHealth"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/HeroName" />
 
@@ -53,6 +56,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/baseMana"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/BaseHealthDes" />
 
@@ -62,8 +67,10 @@
         android:layout_height="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BaseHealthDes"
         app:layout_constraintTop_toBottomOf="@+id/HeroName" />
@@ -76,6 +83,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BaseManaDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseHealth" />
@@ -87,6 +96,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/attackRange"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/BaseManaDes" />
 
@@ -98,6 +109,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AttackRangeDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMana" />
@@ -109,6 +122,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/attackRate"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/AttackRangeDes" />
 
@@ -120,6 +135,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AttackRateDes"
         app:layout_constraintTop_toBottomOf="@+id/AttackRange" />
@@ -131,6 +148,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/baseArmor"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
 
@@ -141,6 +160,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseArmorDes"
         app:layout_constraintTop_toBottomOf="@+id/MoveSpeedDes" />
 
@@ -151,6 +172,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/baseMR"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseArmorDes" />
 
@@ -161,6 +184,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseMrDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseArmor" />
 
@@ -171,6 +196,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/baseSTR"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseMrDes" />
 
@@ -181,6 +208,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseStrDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
 
@@ -191,6 +220,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/strGain"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseStr"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
 
@@ -202,6 +233,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/StrGainDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseMR" />
@@ -213,6 +246,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/baseAgi"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseStrDes" />
 
@@ -223,6 +258,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseAgiDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseStr" />
 
@@ -233,6 +270,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/baseInt"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BaseAgiDes" />
 
@@ -243,6 +282,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseIntDes"
         app:layout_constraintTop_toBottomOf="@+id/BaseAgi" />
 
@@ -253,6 +294,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/agiGain"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseAgi"
         app:layout_constraintTop_toBottomOf="@+id/StrGainDes" />
 
@@ -264,6 +307,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AgiGainDes"
         app:layout_constraintTop_toBottomOf="@+id/StrGain" />
@@ -275,6 +320,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/intGain"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/BaseInt"
         app:layout_constraintTop_toBottomOf="@+id/AgiGainDes" />
 
@@ -286,6 +333,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/IntGainDes"
         app:layout_constraintTop_toBottomOf="@+id/AgiGain" />
@@ -297,6 +346,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/moveSpeed"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/HeroImage"
         app:layout_constraintTop_toBottomOf="@+id/AttackRateDes" />
 
@@ -307,6 +358,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/textview"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/MoveSpeedDes"
         app:layout_constraintTop_toBottomOf="@+id/AttackRate" />
 
