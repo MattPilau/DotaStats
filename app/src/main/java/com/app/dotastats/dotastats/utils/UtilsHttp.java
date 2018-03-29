@@ -1,8 +1,12 @@
 package com.app.dotastats.dotastats.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
+import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,12 +14,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
 public class UtilsHttp {
 
     // performs the actual request to the API
-    private static String request(URL url) throws IOException {
+    private static String request(URL url) throws IOException{
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -78,6 +83,11 @@ public class UtilsHttp {
         HttpURLConnection connection = (HttpURLConnection) tempUrl.openConnection();
         InputStream is = connection.getInputStream();
         return BitmapFactory.decodeStream(is);
+    }
+
+    public static void startRepetitiveRequest(Context context){
+        Intent intentService = new Intent(context, FavoritePlayerLastGameService.class);
+        context.startService(intentService);
     }
 
 }

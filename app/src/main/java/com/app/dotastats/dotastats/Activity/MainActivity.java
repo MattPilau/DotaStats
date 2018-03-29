@@ -1,27 +1,31 @@
 package com.app.dotastats.dotastats.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
 import com.app.dotastats.dotastats.R;
-import com.app.dotastats.dotastats.utils.UtilsPreferences;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 
 public class MainActivity extends AppCompatActivity {
+
+    Boolean startRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startRequest = true;
     }
 
     // Action bar => makes the whole application lagging ?!
-
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
@@ -30,21 +34,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent homeIntent = new Intent(this, MainActivity.class);
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(homeIntent);
-
-        return super.onOptionsItemSelected(item);
-    }*/
+        switch (item.getItemId()) {
+            case R.id.home:{
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                return true;
+            }
+            case R.id.heart:{
+                Intent intent = new Intent(this, FavoritePlayersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onStart(){
         super.onStart();
 
-        //UtilsPreferences.clearFavoritePlayers(getApplicationContext());
-
-        Intent intentService = new Intent(getApplicationContext(), FavoritePlayerLastGameService.class);
-        startService(intentService);
+        if(startRequest && !getIntent().hasExtra("comeback")) {
+            UtilsHttp.startRepetitiveRequest(getApplicationContext());
+        }
 
         findViewById(R.id.findPlayer).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
                 v.getContext().startActivity(myIntent);
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        startRequest = true;
     }
 
     @Override

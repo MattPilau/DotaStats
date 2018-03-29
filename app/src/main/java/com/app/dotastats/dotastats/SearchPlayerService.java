@@ -51,21 +51,16 @@ public class SearchPlayerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         final Handler handler = new Handler();
 
-        // displays 'plop'
-        task = new TimerTask() {
+        handler.post(new Runnable() {
             public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        myTask  = new MyTask(namePlayer,players,adapter);
-                        myTask.execute();
-                    } });
-            }};
-        task.run();
+                myTask  = new MyTask(namePlayer,players,adapter);
+                myTask.execute();
+            } });
         return START_STICKY;
     }
 
     public void onDestroy() { // Destruction du service
-        task.cancel();
+        myTask.cancel(true);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -123,7 +118,7 @@ public class SearchPlayerService extends Service {
 
             try {
 
-                if(dataCleaned.equals("[]")){
+                if(dataCleaned.equals("[]") || dataCleaned==null){
                     playerError = true;
                     return null;
                 }

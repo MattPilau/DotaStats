@@ -46,20 +46,16 @@ public class SearchHeroService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         final Handler handler = new Handler();
 
-        task = new TimerTask() {
+        handler.post(new Runnable() {
             public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        myTask  = new MyTask(nameHero, hero);
-                        myTask.execute();
-                    } });
-            }};
-        task.run();
+                myTask  = new MyTask(nameHero, hero);
+                myTask.execute();
+            } });
         return START_STICKY;
     }
 
     public void onDestroy() { // Destruction du service
-        task.cancel();
+        myTask.cancel(true);
     }
 
     @SuppressLint("StaticFieldLeak")

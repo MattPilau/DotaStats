@@ -58,7 +58,7 @@ public class FavoritePlayerLastGameService extends Service {
                             if(nbPlayers > 0){
                                 i = (i+1)%nbPlayers;
 
-                                BackgroundRequestTask backgroundRequestTask = new BackgroundRequestTask(i);
+                                BackgroundRequestTask backgroundRequestTask = new BackgroundRequestTask();
                                 backgroundRequestTask.execute();
                             }
                         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class FavoritePlayerLastGameService extends Service {
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 60000);
+        timer.schedule(doAsynchronousTask, 0, 20000);
 
         return START_STICKY;
     }
@@ -81,12 +81,10 @@ public class FavoritePlayerLastGameService extends Service {
     @SuppressLint("StaticFieldLeak")
     private class BackgroundRequestTask extends AsyncTask<Void, Void, Void> {
 
-        int i;
-        String id,idLastGame;
+        String id,idLastGame,name;
         Boolean newGame = false,internetError = false;
 
-        private BackgroundRequestTask(int player){
-            this.i = player;
+        private BackgroundRequestTask(){
         }
 
         @Override
@@ -98,10 +96,10 @@ public class FavoritePlayerLastGameService extends Service {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
+
             if(newGame)
                 sendNotification();
-            else
-                Toast.makeText(getBaseContext(), "No new game " + id, Toast.LENGTH_SHORT).show();
 
             if(internetError)
                 Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
@@ -123,6 +121,7 @@ public class FavoritePlayerLastGameService extends Service {
             Player p = UtilsPreferences.getSpecificPlayer(getBaseContext(),i);
             id = p.getId();
             idLastGame = p.getIdLastGame();
+            name = p.getName();
 
             String data = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + id + "/recentMatches");
 
@@ -136,10 +135,10 @@ public class FavoritePlayerLastGameService extends Service {
 
                     long unixSeconds = array.getJSONObject(0).getLong("start_time");
                     Date date = new java.util.Date(unixSeconds*1000L);
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy - MM - dd");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
                     String lastPlayed = sdf.format(date);
 
-                    UtilsPreferences.updateLastGame(getBaseContext(),i,idLastGame,lastPlayed);
+                    UtilsPreferences.updateLastGame(getBaseContext(),i,lastGame,lastPlayed);
                 }
                 idLastGame = lastGame;
 
@@ -154,15 +153,17 @@ public class FavoritePlayerLastGameService extends Service {
             Intent intent = new Intent(getApplicationContext(), PlayerProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra("playerIndex",i);
-            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getBaseContext(),"DotaStats")
                     .setSmallIcon(R.drawable.logo)
                     .setContentTitle("New Game ! ")
-                    .setContentText("The player " + i + " just finished a new game ! ")
+                    .setContentText(name  + " just finished a new game ! ")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
-                    .setDefaults(DEFAULT_VIBRATE);
+                    .setDefaults(DEFAULT_VIBRATE)
+                    .setAutoCancel(true);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
 

@@ -5,7 +5,12 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
-        android:title="Home"
-        app:showAsAction="ifRoom"></item>
+        android:title="@+id/home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/heart"
+        android:icon="@drawable/heart"
+        android:title="@+id/favorite"
+        app:showAsAction="ifRoom"/>
 
 </menu>

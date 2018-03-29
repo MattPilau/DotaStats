@@ -54,21 +54,16 @@ public class AllHeroesService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         final Handler handler = new Handler();
 
-        // displays 'plop'
-        task = new TimerTask() {
+        handler.post(new Runnable() {
             public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        myTask  = new MyTask(heroes);
-                        myTask.execute();
-                    } });
-            }};
-        task.run();
+                myTask  = new MyTask(heroes);
+                myTask.execute();
+            } });
         return START_STICKY;
     }
 
     public void onDestroy() { // Destruction du service
-        task.cancel();
+        myTask.cancel(true);
     }
 
     @SuppressLint("StaticFieldLeak")
