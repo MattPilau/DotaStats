@@ -118,7 +118,7 @@ public class SearchPlayerService extends Service {
 
             try {
 
-                if(dataCleaned.equals("[]")){
+                if(dataCleaned.equals("[]") || dataCleaned==null){
                     playerError = true;
                     return null;
                 }

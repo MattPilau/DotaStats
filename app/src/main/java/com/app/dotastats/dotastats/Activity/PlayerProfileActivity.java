@@ -9,6 +9,9 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -16,11 +19,13 @@ import android.widget.Toast;
 import com.app.dotastats.dotastats.Beans.Matches;
 import com.app.dotastats.dotastats.Beans.MostPlayedHeroes;
 import com.app.dotastats.dotastats.Beans.Player;
+import com.app.dotastats.dotastats.FavoritePlayerLastGameService;
 import com.app.dotastats.dotastats.Interfaces.PlayerProfileInterface;
 import com.app.dotastats.dotastats.LastHeroesFragment;
 import com.app.dotastats.dotastats.LastMatchesFragment;
 import com.app.dotastats.dotastats.PlayerProfileService;
 import com.app.dotastats.dotastats.R;
+import com.app.dotastats.dotastats.utils.UtilsHttp;
 import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
@@ -32,7 +37,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
     private Matches matches;
     private MostPlayedHeroes mostPlayedHeroes;
     private FragmentManager fragmentManager;
-    private Boolean request;
+    private Boolean request,comingFromNotif;
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -63,12 +68,42 @@ public class PlayerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_profile);
 
         request = true;
+        comingFromNotif = false;
 
         player = new Player();
         matches = new Matches();
         mostPlayedHeroes = new MostPlayedHeroes();
 
         fragmentManager = getFragmentManager();
+    }
+
+    // Action bar => makes the whole application lagging ?!
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.home:{
+                stopService(new Intent(this,FavoritePlayerLastGameService.class));
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                return true;
+            }
+            case R.id.heart:{
+                Intent intent = new Intent(this, FavoritePlayersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -85,6 +120,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.hasExtra("playerIndex")){
             player = UtilsPreferences.getSpecificPlayer(getBaseContext(),intent.getIntExtra("playerIndex",0));
+            UtilsHttp.startRepetitiveRequest(getApplicationContext());
+            comingFromNotif = true;
         }
         else {
             player.setId(intent.getStringExtra("idPlayer"));

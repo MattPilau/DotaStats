@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -53,6 +55,34 @@ public class AllHeroesActivity extends AppCompatActivity {
         adapter = new AllHeroAdapter(new ArrayList<Hero>());
         ((RecyclerView) findViewById(R.id.AllHeroesList)).setAdapter(adapter);
         ((RecyclerView) findViewById(R.id.AllHeroesList)).setLayoutManager(new LinearLayoutManager(getBaseContext()));
+    }
+
+    // Action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.home:{
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                return true;
+            }
+            case R.id.heart:{
+                Intent intent = new Intent(this, FavoritePlayersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

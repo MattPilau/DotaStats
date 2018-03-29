@@ -103,7 +103,8 @@ public class PlayerProfileService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            (views.get(7)).setVisibility(View.VISIBLE);
+            if(views.get(7) != null)
+                (views.get(7)).setVisibility(View.VISIBLE);
         }
 
         @Override

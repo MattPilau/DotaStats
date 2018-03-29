@@ -1,8 +1,10 @@
 package com.app.dotastats.dotastats.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +16,7 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
 
-public class FavoritePlayersActivity extends Activity {
+public class FavoritePlayersActivity extends AppCompatActivity {
 
     private ArrayList<Player> players;
     private ListView listview;
@@ -25,6 +27,41 @@ public class FavoritePlayersActivity extends Activity {
         setContentView(R.layout.preference_layout);
 
         listview = findViewById(R.id.list_favorite_players);
+    }
+
+    // Action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.home:{
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                return true;
+            }
+            case R.id.heart:{
+                Intent intent = new Intent(this, FavoritePlayersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void goHome(){
+
+    }
+    public void goFavorite(){
+
     }
 
     @Override

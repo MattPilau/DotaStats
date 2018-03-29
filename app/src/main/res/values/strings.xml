@@ -81,5 +81,7 @@
     <string name="win">Win</string>
     <string name="defeat">Defeat</string>
 
+    <string name = "home">Home</string>
+    <string name = "favorite">Favorite</string>
 
 </resources>
