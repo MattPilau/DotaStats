@@ -20,13 +20,11 @@ import com.app.dotastats.dotastats.SearchHeroService;
 import java.util.ArrayList;
 
 // activity used when a user writes the name of a hero => the app displays to him each hero corresponding to what he wrote
-
 public class HeroesActivity extends AppCompatActivity {
 
     private Hero hero;
     private String nameHero;
     private Boolean request;
-
 
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {

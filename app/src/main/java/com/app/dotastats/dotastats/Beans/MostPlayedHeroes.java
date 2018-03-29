@@ -21,6 +21,7 @@ public class MostPlayedHeroes {
     public MostPlayedHeroes(){
     }
 
+    // add a new hero to the list
     public void addNewHeroes(JSONArray array){
         for (int i=0; i < 10; i++)
         {
@@ -42,6 +43,8 @@ public class MostPlayedHeroes {
         }
     }
 
+    // update the content of the list of the hero a player played most
+    // at the beginning the list is always empty and gets content when this JSON array comes from the API
     public void updateHeroes(JSONArray array){
         for (int i=0; i < mostPlayedHeroes.size(); i++)
         {

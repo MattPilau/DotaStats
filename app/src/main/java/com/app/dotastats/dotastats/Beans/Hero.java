@@ -87,14 +87,15 @@ public class Hero {
     public double getMove_speed() {return move_speed;}
     private void setMove_speed(double move_speed) {this.move_speed = move_speed;}
 
+    // debug only
     public void displayHero(){
         System.out.println(name);
         System.out.println(Double.toString(base_health));
         System.out.println(Double.toString(base_mana));
     }
 
-
-
+    // edit a hero profile when the player wants to see the stats of a specific hero
+    // the method is called when the API sends those stats to the application
     public Boolean addHeroStats(JSONArray array, String desiredName) throws JSONException {
 
         for(int i = 0; i < array.length(); i++){

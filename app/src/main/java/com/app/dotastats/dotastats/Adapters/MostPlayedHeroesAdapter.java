@@ -16,6 +16,8 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.List;
 
+// simple adapter for a listfragment
+// displays the 10 most played heroes of a player
 public class MostPlayedHeroesAdapter extends ArrayAdapter<MostPlayedHero>{
 
     public MostPlayedHeroesAdapter(Context context, List<MostPlayedHero> mostPlayedHeroes) {

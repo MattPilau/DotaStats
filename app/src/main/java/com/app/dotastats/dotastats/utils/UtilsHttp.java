@@ -67,6 +67,7 @@ public class UtilsHttp {
         return dataCleaned;
     }
 
+    // simple request called when we have the URL of a picture and wants it as a Bitmap
     public static Bitmap getPicture(String url) throws IOException {
         URL url2 = new URL(url);
 
@@ -75,16 +76,14 @@ public class UtilsHttp {
         return BitmapFactory.decodeStream(is);
     }
 
+    // same principle as the one but the image of the hero needs to be handled specifically because of their URL
     public static Bitmap getHeroImage(String url) throws IOException{
 
         String newUrl = "http://cdn.dota2.com" + url;
-        URL tempUrl = new URL(newUrl);
-
-        HttpURLConnection connection = (HttpURLConnection) tempUrl.openConnection();
-        InputStream is = connection.getInputStream();
-        return BitmapFactory.decodeStream(is);
+        return getPicture(newUrl);
     }
 
+    // begins to check if a favorite player finished a game
     public static void startRepetitiveRequest(Context context){
         Intent intentService = new Intent(context, FavoritePlayerLastGameService.class);
         context.startService(intentService);

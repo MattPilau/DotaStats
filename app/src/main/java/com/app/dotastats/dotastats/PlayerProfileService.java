@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// gets the information about the player (id, name, last results, ranking...)
 public class PlayerProfileService extends Service {
 
     private TaskProfile myTask;
@@ -59,6 +60,8 @@ public class PlayerProfileService extends Service {
 
         final Handler handler = new Handler();
 
+        // 2 requests : we don't need to get the information about the heroes at the beginning because they will be hidden to the user
+        // so we just get the important data, and we'll get the information about the heroes when the user will specifically ask for those information
         if(wantsMatches) {
             handler.post(new Runnable() {
                 public void run() {
@@ -78,7 +81,7 @@ public class PlayerProfileService extends Service {
         return START_STICKY;
     }
 
-    public void onDestroy() { // Destruction du service
+    public void onDestroy() {
         if(wantsMatches)
             myTask.cancel(true);
         else
@@ -100,6 +103,7 @@ public class PlayerProfileService extends Service {
             fragmentManager = manager;
         }
 
+        // displays a progress bar
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -107,6 +111,7 @@ public class PlayerProfileService extends Service {
                 (views.get(7)).setVisibility(View.VISIBLE);
         }
 
+        // sets everything in place
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
@@ -137,9 +142,11 @@ public class PlayerProfileService extends Service {
 
         }
 
+        // gets the infrormation about the profile and the recent matches of the playezr
         @Override
         protected Void doInBackground(Void ...params) {
 
+            // no internet = cancellation of the request
             NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if(info == null){
                 internetError = true;
@@ -148,6 +155,7 @@ public class PlayerProfileService extends Service {
 
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + player.getId());
 
+            // something went wrong so we quit the method
             if(dataCleaned == null){
                 playerError = true;
                 return null;
@@ -161,6 +169,7 @@ public class PlayerProfileService extends Service {
 
             dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/"+player.getId()+"/recentMatches");
 
+            // something went wrong so we quit the method
             if(dataCleaned == null){
                 playerError = true;
                 return null;
@@ -211,6 +220,7 @@ public class PlayerProfileService extends Service {
 
         }
 
+        // gets the information about the most played heroes of the player
         @Override
         protected Void doInBackground(Void ...params) {
 

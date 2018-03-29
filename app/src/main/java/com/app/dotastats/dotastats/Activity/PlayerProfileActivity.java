@@ -9,7 +9,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +29,7 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
 
+// displays the profile of a player
 public class PlayerProfileActivity extends AppCompatActivity {
     private Player player;
     private Boolean isFavorite;
@@ -39,6 +39,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Boolean request,comingFromNotif;
 
+    // connect the service and the activity
     private ServiceConnection maConnexion = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
             PlayerProfileInterface myBinder = (PlayerProfileInterface) service;
@@ -77,7 +78,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         fragmentManager = getFragmentManager();
     }
 
-    // Action bar => makes the whole application lagging ?!
+    // Action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
@@ -110,6 +111,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        // prevent the service from starting multiple times
         if(request){
             final Intent intentProfilePlayer = new Intent(getBaseContext(),PlayerProfileService.class);
             bindService(intentProfilePlayer, maConnexion, Context.BIND_AUTO_CREATE);
@@ -117,6 +119,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
             startService(intentProfilePlayer);
         }
 
+        // checks if the user comes from the application or from a notification
         Intent intent = getIntent();
         if(intent.hasExtra("playerIndex")){
             player = UtilsPreferences.getSpecificPlayer(getBaseContext(),intent.getIntExtra("playerIndex",0));
@@ -154,6 +157,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
             }
         });
 
+        // button used to switch between both fragments
         findViewById(R.id.switch1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,11 +176,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
                     else
                         goToHeroesMostPlayedFragment();
                 }
-
             }
         });
-
-
     }
 
     @Override
@@ -192,6 +193,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         stopService(new Intent(this,PlayerProfileService.class));
     }
 
+    // manages the fragment to allow the user to switch between the herofragment and the matchfragment
     private void goToLastMatchFragment(){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

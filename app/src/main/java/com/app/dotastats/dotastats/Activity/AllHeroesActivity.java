@@ -24,6 +24,7 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.ArrayList;
 
+// display a list of all heroes in a recyclerview
 public class AllHeroesActivity extends AppCompatActivity {
 
     private AllHeroAdapter adapter;
@@ -89,12 +90,14 @@ public class AllHeroesActivity extends AppCompatActivity {
     protected  void onStart(){
         super.onStart();
 
+        // prevents the search service from starting multiple times
         if(request){
             final Intent intentAllHeroes = new Intent (getBaseContext(), AllHeroesService.class);
             bindService(intentAllHeroes, maConnexion, Context.BIND_AUTO_CREATE);
             startService(intentAllHeroes);
         }
 
+        // if the user wants to add filters to his search
         findViewById(R.id.settingsSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +106,7 @@ public class AllHeroesActivity extends AppCompatActivity {
             }
         });
 
+        // once the results are displayed, the user can refresh (usually he will do it if he changed the filters)
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

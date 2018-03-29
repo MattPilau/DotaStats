@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.app.dotastats.dotastats.PreferenceScreenFragment;
 import com.app.dotastats.dotastats.R;
 
+// displays the preferences stored in the preference fragment
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -21,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         mFragmentTransaction.commit();
     }
 
-    // Action bar => makes the whole application lagging ?!
+    // Action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);

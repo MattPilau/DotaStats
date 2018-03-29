@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
+// gets the list of all heroes depending on the filters decided by the user
 public class AllHeroesService extends Service {
 
     private final IBinder binder = new MonServiceBinder();
@@ -76,6 +77,7 @@ public class AllHeroesService extends Service {
             heroes = data;
         }
 
+        // set visible the progress bar
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -85,6 +87,7 @@ public class AllHeroesService extends Service {
             button.setEnabled(false);
         }
 
+        // hide the progress bar and display the whole reycler view
         @Override
         protected void onPostExecute(Void result) {
             if(internetError)
@@ -104,6 +107,7 @@ public class AllHeroesService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
+            // if there isn't any internet, it cancels the request
             NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if(info == null){
                 internetError = true;
