@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.app.dotastats.dotastats.Adapters.TeamAdapter;
 import com.app.dotastats.dotastats.Beans.MatchStat;
@@ -50,7 +49,6 @@ public class MatchService extends Service {
 
         handler.post(new Runnable() {
             public void run() {
-                Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
                 task  = new TaskMatch(idMatch, fragmentManager, match);
                 task.execute();
             } });
@@ -58,7 +56,6 @@ public class MatchService extends Service {
     }
 
     public void onDestroy() { // Destruction du service
-        Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
         task.cancel(true);
     }
 
