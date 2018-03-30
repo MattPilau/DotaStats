@@ -14,8 +14,7 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.ArrayList;
 
-
-
+// Displays a list of all the heroes (depending on the filters chosen by the user)
 public class AllHeroAdapter extends RecyclerView.Adapter<AllHeroAdapter.MyViewHolder>{
 
     private ArrayList<Hero> heroes;

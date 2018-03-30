@@ -29,6 +29,8 @@ import java.util.TimerTask;
 
 import static android.app.Notification.DEFAULT_VIBRATE;
 
+// checks every 2 mins if a favorite player of the current user finished a game
+// if he did, the application will send a notification
 public class FavoritePlayerLastGameService extends Service {
 
     TimerTask doAsynchronousTask;
@@ -46,6 +48,7 @@ public class FavoritePlayerLastGameService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
 
+        // checks one player every 2 min to be sure not to overuse the API and the mobile data of the user
         final Handler handler = new Handler();
         Timer timer = new Timer();
         doAsynchronousTask = new TimerTask() {
@@ -68,7 +71,7 @@ public class FavoritePlayerLastGameService extends Service {
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 20000);
+        timer.schedule(doAsynchronousTask, 0, 120000);
 
         return START_STICKY;
     }
@@ -82,7 +85,7 @@ public class FavoritePlayerLastGameService extends Service {
     private class BackgroundRequestTask extends AsyncTask<Void, Void, Void> {
 
         String id,idLastGame,name;
-        Boolean newGame = false,internetError = false;
+        Boolean newGame = false,internetError = false,otherError = false;
 
         private BackgroundRequestTask(){
         }
@@ -96,12 +99,10 @@ public class FavoritePlayerLastGameService extends Service {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
-
             if(newGame)
                 sendNotification();
 
-            if(internetError)
+            if(internetError || otherError)
                 Toast.makeText(getBaseContext(), "No internet ! ", Toast.LENGTH_SHORT).show();
         }
 
@@ -112,6 +113,7 @@ public class FavoritePlayerLastGameService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
+            // cancels the request in case of no internet
             NetworkInfo info = ((ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if(info == null){
                 internetError = true;
@@ -125,11 +127,17 @@ public class FavoritePlayerLastGameService extends Service {
 
             String data = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/players/" + id + "/recentMatches");
 
+            if(data == null) {
+                otherError = true;
+                return null;
+            }
+
             try {
                 JSONArray array = new JSONArray(data);
 
                 String lastGame = array.getJSONObject(0).getString("match_id");
 
+                // compare the id of the last game of the player with the one stored on the phone
                 if(!lastGame.equals(idLastGame)){
                     newGame = true;
 
@@ -138,6 +146,7 @@ public class FavoritePlayerLastGameService extends Service {
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
                     String lastPlayed = sdf.format(date);
 
+                    // updates the information stored on the phone
                     UtilsPreferences.updateLastGame(getBaseContext(),i,lastGame,lastPlayed);
                 }
                 idLastGame = lastGame;
@@ -149,6 +158,8 @@ public class FavoritePlayerLastGameService extends Service {
             return null;
         }
 
+        // sends a notification to the user
+        // when the user will click on it, it will lead him to the profile of the user who just finished a game
         void sendNotification(){
             Intent intent = new Intent(getApplicationContext(), PlayerProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

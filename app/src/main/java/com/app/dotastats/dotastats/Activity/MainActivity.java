@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         startRequest = true;
     }
 
-    // Action bar => makes the whole application lagging ?!
+    // Action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        if(startRequest && !getIntent().hasExtra("comeback")) {
+        // prevents of starting a new service each time the user comes back to the main screen
+        if(startRequest) {
             UtilsHttp.startRepetitiveRequest(getApplicationContext());
         }
 

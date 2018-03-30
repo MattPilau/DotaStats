@@ -27,6 +27,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
+// gets the list of players whose name matches what the user wrote
 public class SearchPlayerService extends Service {
 
     private final IBinder binder = new MonServiceBinder();

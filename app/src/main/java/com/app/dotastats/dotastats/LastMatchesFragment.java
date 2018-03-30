@@ -13,6 +13,7 @@ import com.app.dotastats.dotastats.Adapters.LastMatchesAdapter;
 import com.app.dotastats.dotastats.Beans.Matches;
 import com.app.dotastats.dotastats.MatchActivity;
 
+// display the last 15 games of the player
 public class LastMatchesFragment extends ListFragment {
 
     Matches matches;

@@ -25,8 +25,8 @@ import com.app.dotastats.dotastats.Beans.Hero;
 import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
+// gets the hero corresponding to what the user wrote
 public class SearchHeroService extends Service {
-
 
     private final IBinder binder = new MonServiceBinder();
 
@@ -117,6 +117,11 @@ public class SearchHeroService extends Service {
             }
 
             String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
+
+            if(dataCleaned == null){
+                heroError = true;
+                return null;
+            }
 
             try {
                 JSONArray data = new JSONArray(dataCleaned);

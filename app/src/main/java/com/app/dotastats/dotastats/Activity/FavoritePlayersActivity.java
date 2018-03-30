@@ -16,6 +16,7 @@ import com.app.dotastats.dotastats.utils.UtilsPreferences;
 
 import java.util.ArrayList;
 
+// displays each favorite players of the user
 public class FavoritePlayersActivity extends AppCompatActivity {
 
     private ArrayList<Player> players;
@@ -68,6 +69,7 @@ public class FavoritePlayersActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // gets the players from the preferences
         players = UtilsPreferences.getAllFavoritePlayers(getBaseContext());
 
         ArrayList<String> names = new ArrayList<>();
@@ -78,6 +80,7 @@ public class FavoritePlayersActivity extends AppCompatActivity {
                 R.layout.preference_players, R.id.nameFavoritePlayers, names);
         listview.setAdapter(adapter);
 
+        // allow the user to go directly to the profile of the player
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

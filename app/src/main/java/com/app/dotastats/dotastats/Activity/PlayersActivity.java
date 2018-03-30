@@ -27,7 +27,6 @@ import com.app.dotastats.dotastats.SearchPlayerService;
 import java.util.ArrayList;
 
 // activity used when a user writes the name of a player => the app displays to him each player corresponding to what he wrote
-
 public class PlayersActivity extends AppCompatActivity {
 
     private String namePlayer;
@@ -60,7 +59,7 @@ public class PlayersActivity extends AppCompatActivity {
         ((RecyclerView) findViewById(R.id.list)).setLayoutManager(new LinearLayoutManager(getBaseContext()));
     }
 
-    // Action bar => makes the whole application lagging ?!
+    // Action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
@@ -92,6 +91,7 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        // prevents to start the service multiple times
         if(request){
             final Intent intentSearchPlayer = new Intent(getBaseContext(),SearchPlayerService.class);
             bindService(intentSearchPlayer, maConnexion, Context.BIND_AUTO_CREATE);
@@ -104,6 +104,7 @@ public class PlayersActivity extends AppCompatActivity {
         String s = getString(R.string.results) + " " + namePlayer;
         ((TextView)findViewById(R.id.namePlayer)).setText(s);
 
+        // when the wifi is disabled the request will stop and the button will be unlocked, to allow the user to launch the wifi directly from the application
         findViewById(R.id.wifi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +119,7 @@ public class PlayersActivity extends AppCompatActivity {
             }
         });
 
+        // refresh is available when the request went wrong (no internet, bug... )
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

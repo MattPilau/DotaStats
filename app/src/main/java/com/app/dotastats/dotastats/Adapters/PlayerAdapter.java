@@ -16,6 +16,8 @@ import com.app.dotastats.dotastats.R;
 import java.util.ArrayList;
 import java.util.List;
 
+// adapter for a recyclerview
+// displays 25 players whose name matches what the user wrote
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.MyViewHolder> {
 
     private ArrayList<Player> players ;

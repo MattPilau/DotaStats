@@ -14,6 +14,8 @@ import com.app.dotastats.dotastats.R;
 
 import java.util.List;
 
+// simple adapter for a listfragment
+// displays the last 15 games of the player
 public class LastMatchesAdapter extends ArrayAdapter<Match>{
 
     public LastMatchesAdapter(Context context, List<Match> matches) {

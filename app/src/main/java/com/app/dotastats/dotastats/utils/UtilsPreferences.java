@@ -9,8 +9,10 @@ import com.app.dotastats.dotastats.Beans.Player;
 
 import java.util.ArrayList;
 
+// manages the shared preferences where the data about the favorite players is stored
 public class UtilsPreferences {
 
+    // add a new player to the list and increases the total number of registered players
     public static void addNewPlayerToListFavorite(Context context,Player player){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -25,6 +27,7 @@ public class UtilsPreferences {
         editor.apply();
     }
 
+    // remove the player and handles the other in order not to lose any information
     public static void removePlayerFromListFavorite(Context context,Player player){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -44,6 +47,7 @@ public class UtilsPreferences {
                     editor.apply();
                     alreadyRemoved = true;
                 }
+                // needs to fill the blank left by the disappearance of the previous player
                 else if(alreadyRemoved){
                     editor.putString("FavoritePlayer"+Integer.toString(i)+"Name", players.get(i).getName());
                     editor.putString("FavoritePlayer"+Integer.toString(i)+"id", players.get(i).getId());
@@ -61,6 +65,7 @@ public class UtilsPreferences {
         }
     }
 
+    // get all favorite players and returns them as a list
     public static ArrayList<Player> getAllFavoritePlayers(Context context){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
 
@@ -78,6 +83,8 @@ public class UtilsPreferences {
         return players;
     }
 
+    // remove every player from this list
+    // used only to debug, bug could be implemented later
     public static void clearFavoritePlayers(Context context){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -86,6 +93,7 @@ public class UtilsPreferences {
         editor.apply();
     }
 
+    // checks if the player is already registered as a favorite or not
     public static boolean isPlayerAFavorite(Context context, String id){
         ArrayList<Player> players = getAllFavoritePlayers(context);
         for(int i = 0; i < players.size(); i++){
@@ -95,14 +103,17 @@ public class UtilsPreferences {
         return false;
     }
 
+    // returns the number of favorite players
     public static int getNumberFavoritePlayers(Context context){
         return context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE).getInt("nbFavoritePlayers",0);
     }
 
+    // gets the stored information about a specific player
     public static Player getSpecificPlayer(Context context, int i){
         return getAllFavoritePlayers(context).get(i);
     }
 
+    // update the stored data when the player finished a game
     public static void updateLastGame(Context context, int index,String id, String lastPlayed){
         SharedPreferences sharedPref = context.getSharedPreferences("favoritePlayers", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -111,15 +122,18 @@ public class UtilsPreferences {
         editor.putString("FavoritePlayer"+Integer.toString(index+1)+"idLastGame",id);
         editor.putString("FavoritePlayer"+Integer.toString(index+1)+"lastPlayed", lastPlayed);
 
-
         editor.apply();
     }
 
+    // gets the filters used for the "hero search"
+    // if it is false, the search will return every hero ; if true, it will only return the hero matching what the player wants (carry, support... )
     public static Boolean filtersEnabled(Context context){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean("enableFilters",false);
     }
 
+    // return a list of all filters chosen by the players
+    // can return an empty list, but it will just display an empty list of heroes to the player
     public static ArrayList<String> askedFilters(Context context){
 
         ArrayList<String> roles = new ArrayList<>();
