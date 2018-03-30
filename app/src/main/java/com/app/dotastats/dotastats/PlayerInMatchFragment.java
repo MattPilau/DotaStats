@@ -1,18 +1,15 @@
 package com.app.dotastats.dotastats;
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Alexis on 28/03/2018.
- */
+import com.app.dotastats.dotastats.Beans.PlayerStat;
+
 
 public class PlayerInMatchFragment extends Fragment {
 
@@ -21,7 +18,7 @@ public class PlayerInMatchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /** Inflating the layout for this fragment **/
+
         view = inflater.inflate(R.layout.fragment_player_in_match,container,false);
 
         return view;

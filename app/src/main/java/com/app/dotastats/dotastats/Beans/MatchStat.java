@@ -1,4 +1,4 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -10,12 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-/**
- * Created by Alexis on 22/03/2018.
- */
 
 public class MatchStat {
 
@@ -26,10 +21,10 @@ public class MatchStat {
     public MatchStat() {}
 
     public String getIdMatch() { return idMatch; }
-    public void setIdMatch(String idMatch) { this.idMatch = idMatch; }
+    private void setIdMatch(String idMatch) { this.idMatch = idMatch; }
 
     public String getDuration() { return duration; }
-    public void setDuration(String duration) { this.duration = duration; }
+    private void setDuration(String duration) { this.duration = duration; }
 
     public ArrayList<PlayerStat> getPlayers() { return players; }
     public void setPlayers(ArrayList<PlayerStat> players) { this.players = players; }
@@ -51,11 +46,6 @@ public class MatchStat {
         }
         return team;
     }
-
-    /*public void addPlayer(PlayerStat player) {
-        this.players.add(player);
-    }*/
-
 
     public void addMatchStat(JSONObject object) throws JSONException{
         Log.i("Buggg", "something 3");
@@ -108,7 +98,7 @@ public class MatchStat {
                 for(int j = 0; j < 10; j++){
                     if(temp.getInt("id") == this.getPlayers().get(j).getHeroId()){
                         String url = temp.getString("img");
-                        Bitmap img = new UtilsHttp().getHeroImage(url);
+                        Bitmap img = UtilsHttp.getHeroImage(url);
                         this.getPlayers().get(j).setImage(img);
                     }
                 }

@@ -1,24 +1,22 @@
 package com.app.dotastats.dotastats;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.os.Handler;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import java.util.List;
 
-import com.app.dotastats.dotastats.Interfaces.SearchHeroInterface;
+import com.app.dotastats.dotastats.Adapters.TeamAdapter;
+import com.app.dotastats.dotastats.Beans.MatchStat;
 import com.app.dotastats.dotastats.Interfaces.SearchMatchInterface;
 import com.app.dotastats.dotastats.utils.UtilsHttp;
 
@@ -26,14 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.TimerTask;
-
 public class MatchService extends Service {
 
     private final IBinder binder = new MonServiceBinder();
 
-    private TimerTask timerTask;
     private TaskMatch task;
     private String idMatch;
     private MatchStat match;
@@ -52,25 +46,24 @@ public class MatchService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId){
 
-        final Handler handler = new Handler();
+        Handler handler = new Handler();
 
-        timerTask = new TimerTask() {
+        handler.post(new Runnable() {
             public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
-                        task  = new TaskMatch(idMatch, fragmentManager, match);
-                        task.execute();
-                    } });
-            }};
-        timerTask.run();
+                Toast.makeText(getBaseContext(), "Request made !", Toast.LENGTH_SHORT).show();
+                task  = new TaskMatch(idMatch, fragmentManager, match);
+                task.execute();
+            } });
         return START_STICKY;
     }
 
     public void onDestroy() { // Destruction du service
         Toast.makeText(getBaseContext(), "DESTRUCTION", Toast.LENGTH_SHORT).show();
-        //task.cancel();
+        task.cancel(true);
     }
+
+
+    @SuppressLint("StaticFieldLeak")
     private class TaskMatch extends AsyncTask<Void, Void, Void> {
 
         String idMatch;
@@ -121,7 +114,7 @@ public class MatchService extends Service {
         @Override
         protected Void doInBackground(Void ...params) {
 
-            String dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/matches/" + idMatch);
+            String dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/matches/" + idMatch);
             Log.i("Buggg", "something");
 
             try {
@@ -132,7 +125,7 @@ public class MatchService extends Service {
                 e.printStackTrace();
             }
 
-            dataCleaned = new UtilsHttp().getInfoFromAPI("https://api.opendota.com/api/heroStats");
+            dataCleaned = UtilsHttp.getInfoFromAPI("https://api.opendota.com/api/heroStats");
             try {
                 JSONArray data = new JSONArray(dataCleaned);
                 match.addImages(data);

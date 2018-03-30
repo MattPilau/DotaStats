@@ -1,5 +1,6 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Adapters;
 
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -8,18 +9,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.app.dotastats.dotastats.Beans.PlayerStat;
+import com.app.dotastats.dotastats.R;
 
-/**
- * Created by Alexis on 28/03/2018.
- */
+import java.util.List;
 
 public class TeamAdapter extends ArrayAdapter<PlayerStat> {
     public TeamAdapter(Context context, List<PlayerStat> team){
         super(context, 0, team);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent){
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.team,parent, false);
         }
@@ -27,8 +28,8 @@ public class TeamAdapter extends ArrayAdapter<PlayerStat> {
         TeamHolder teamHolder = (TeamHolder) convertView.getTag();
         if(teamHolder == null){
             teamHolder = new TeamHolder();
-            teamHolder.image = (ImageView) convertView.findViewById(R.id.playerImage);
-            teamHolder.playerName = (TextView) convertView.findViewById(R.id.playerName);
+            teamHolder.image = convertView.findViewById(R.id.playerImage);
+            teamHolder.playerName = convertView.findViewById(R.id.playerName);
             convertView.setTag(teamHolder);
         }
 
@@ -42,6 +43,6 @@ public class TeamAdapter extends ArrayAdapter<PlayerStat> {
 
     private class TeamHolder {
         public ImageView image;
-        public TextView playerName;
+        TextView playerName;
     }
 }

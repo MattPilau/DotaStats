@@ -1,15 +1,9 @@
 package com.app.dotastats.dotastats.Interfaces;
 
 import android.app.FragmentManager;
-import android.view.View;
 import android.widget.ListView;
 
-import com.app.dotastats.dotastats.MatchStat;
-import java.util.ArrayList;
-
-/**
- * Created by Alexis on 22/03/2018.
- */
+import com.app.dotastats.dotastats.Beans.MatchStat;
 
 public interface SearchMatchInterface {
 

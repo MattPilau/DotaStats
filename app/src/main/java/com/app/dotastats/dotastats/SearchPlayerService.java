@@ -24,6 +24,7 @@ import com.app.dotastats.dotastats.utils.UtilsHttp;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
@@ -81,9 +82,12 @@ public class SearchPlayerService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            buttonWifi.setEnabled(false);
-            buttonRefresh.setEnabled(false);
-            progressBar.setVisibility(View.VISIBLE);
+            if(buttonWifi != null)
+               buttonWifi.setEnabled(false);
+            if(buttonRefresh != null)
+                buttonRefresh.setEnabled(false);
+            if(progressBar != null )
+                progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override

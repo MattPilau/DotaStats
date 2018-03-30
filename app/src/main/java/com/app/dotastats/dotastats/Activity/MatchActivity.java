@@ -1,24 +1,23 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Activity;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.content.ComponentName;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+import android.os.IBinder;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.app.dotastats.dotastats.Beans.MatchStat;
+import com.app.dotastats.dotastats.Beans.PlayerStat;
 import com.app.dotastats.dotastats.Interfaces.SearchMatchInterface;
-import com.app.dotastats.dotastats.utils.UtilsPreferences;
-
-import java.util.ArrayList;
+import com.app.dotastats.dotastats.MatchService;
+import com.app.dotastats.dotastats.R;
 
 public class MatchActivity extends AppCompatActivity {
 
@@ -42,6 +41,34 @@ public class MatchActivity extends AppCompatActivity {
 
         public void onServiceDisconnected(ComponentName name) { }
     };
+
+    // Action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.home:{
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                return true;
+            }
+            case R.id.heart:{
+                Intent intent = new Intent(this, FavoritePlayersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +118,8 @@ public class MatchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        unbindService(maConnexion);
+        stopService(new Intent(this,MatchService.class));
     }
 
 }

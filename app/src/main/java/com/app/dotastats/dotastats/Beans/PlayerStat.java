@@ -1,10 +1,6 @@
-package com.app.dotastats.dotastats;
+package com.app.dotastats.dotastats.Beans;
 
 import android.graphics.Bitmap;
-
-/**
- * Created by Alexis on 24/03/2018.
- */
 
 public class PlayerStat {
 
@@ -24,9 +20,9 @@ public class PlayerStat {
 
     private Bitmap image;
 
-    public void PlayerStat() {}
+    PlayerStat() {}
 
-    public void PlayerStat(PlayerStat player){
+    public PlayerStat(PlayerStat player){
 
         this.playerName = player.getPlayerName();
         this.heroId = player.getHeroId();
@@ -43,30 +39,30 @@ public class PlayerStat {
     public void setImage(Bitmap image) { this.image = image; }
     public Bitmap getImage() {return  image; }
 
-    public void setPlayerName(String name) { this.playerName = name; }
+    void setPlayerName(String name) { this.playerName = name; }
     public String getPlayerName() { return playerName; }
 
-    public void setHeroId(int heroId) { this.heroId = heroId; }
-    public int getHeroId() {return heroId; }
+    void setHeroId(int heroId) { this.heroId = heroId; }
+    int getHeroId() {return heroId; }
 
-    public void setKills(int kills) { this.kills = kills; }
+    void setKills(int kills) { this.kills = kills; }
     public int getKills() {return kills; }
 
-    public void setDeaths(int deaths) { this.deaths = deaths; }
+    void setDeaths(int deaths) { this.deaths = deaths; }
     public int getDeaths() {return deaths; }
 
-    public void setAssists(int assists) { this.assists = assists; }
+    void setAssists(int assists) { this.assists = assists; }
     public int getAssists() {return assists; }
 
-    public void setGpm(int gpm) { this.gpm = gpm; }
+    void setGpm(int gpm) { this.gpm = gpm; }
     public int getGpm() {return gpm; }
 
-    public void setXppm(int xppm) { this.xppm = xppm; }
+    void setXppm(int xppm) { this.xppm = xppm; }
     public int getXppm() {return xppm; }
 
-    public void setHeroDamage(int heroDamage) { this.heroDamage = heroDamage; }
+    void setHeroDamage(int heroDamage) { this.heroDamage = heroDamage; }
     public int getHeroDamage() {return heroDamage; }
 
-    public void setHeroHealing(int heroHealing) { this.heroHealing = heroHealing; }
+    void setHeroHealing(int heroHealing) { this.heroHealing = heroHealing; }
     public int getHeroHealing() {return heroHealing; }
 }
